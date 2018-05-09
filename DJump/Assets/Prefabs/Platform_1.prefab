@@ -58,8 +58,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.70271003, y: 0.07626033}
-  - {x: 0.6772898, y: 0.07626033}
+  - {x: -0.685, y: 0.25}
+  - {x: 0.685, y: 0.25}
 --- !u!114 &114036716108213092
 MonoBehaviour:
   m_ObjectHideFlags: 1
