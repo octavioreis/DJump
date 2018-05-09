@@ -20,6 +20,17 @@ public class Player : MonoBehaviour
     void Update()
     {
         movement = Input.GetAxis("Horizontal") * MovementSpeed;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            var mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var direction = (mouseWorldPosition - transform.position).normalized;
+            direction.z = 0;
+
+            BulletSocket.transform.up = direction;
+
+            Instantiate(Bullet, BulletSocket.transform.position, BulletSocket.transform.rotation);
+        }
     }
 
     void FixedUpdate()
@@ -33,14 +44,5 @@ public class Player : MonoBehaviour
             position.x = -Mathf.Clamp(position.x, HorizontalMinLimit, HorizontalMaxLimit);
 
         rigidBody.transform.position = new Vector2(position.x, position.y);
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            //var mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //var direction = (mouseWorldPosition - transform.position).normalized;
-            //BulletSocket.transform.up = direction;
-
-            Instantiate(Bullet, BulletSocket.transform.position, BulletSocket.transform.rotation);
-        }
     }
 }
