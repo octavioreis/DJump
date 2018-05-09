@@ -4,10 +4,12 @@
 public class Player : MonoBehaviour
 {
     public GameObject Bullet;
-    public Transform BulletSocket;
+    public Transform SocketTransform;
+    public Transform CameraTransform;
     public float HorizontalMaxLimit;
     public float HorizontalMinLimit;
     public float MovementSpeed = 7f;
+    public float HalfScreenHeight = 4.6f;
 
     private Rigidbody2D rigidBody;
     private float movement = 0f;
@@ -27,10 +29,14 @@ public class Player : MonoBehaviour
             var direction = (mouseWorldPosition - transform.position).normalized;
             direction.z = 0;
 
-            BulletSocket.transform.up = direction;
+            SocketTransform.transform.up = direction;
 
-            Instantiate(Bullet, BulletSocket.transform.position, BulletSocket.transform.rotation);
+            Instantiate(Bullet, SocketTransform.transform.position, SocketTransform.transform.rotation);
         }
+
+        var distanceCameraToPlayer = CameraTransform.position.y - rigidBody.transform.position.y;
+        if (distanceCameraToPlayer >= HalfScreenHeight)
+            GameManager.GameLives = 0;
     }
 
     void FixedUpdate()

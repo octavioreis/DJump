@@ -225,9 +225,24 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114286999877897296, guid: 13492c743f9b00149becca67bbde9d89,
+        type: 2}
+      propertyPath: CameraTransform
+      value: 
+      objectReference: {fileID: 2133131424}
+    - target: {fileID: 114286999877897296, guid: 13492c743f9b00149becca67bbde9d89,
+        type: 2}
+      propertyPath: SocketTransform
+      value: 
+      objectReference: {fileID: 303737225}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13492c743f9b00149becca67bbde9d89, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &303737225 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4280507184605520, guid: 13492c743f9b00149becca67bbde9d89,
+    type: 2}
+  m_PrefabInternal: {fileID: 303737224}
 --- !u!1 &722981393
 GameObject:
   m_ObjectHideFlags: 0
