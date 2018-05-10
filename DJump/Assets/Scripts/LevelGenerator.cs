@@ -5,6 +5,7 @@ public class LevelGenerator : MonoBehaviour
 
     public GameObject PlatformPrefab;
     public GameObject EnemyPrefab;
+    public Transform CameraTransform;
     public int NumberOfPlatforms = 200;
     public float LevelWidth = 3f;
     public float MinY = .5f;
@@ -19,7 +20,10 @@ public class LevelGenerator : MonoBehaviour
             platformPosition.y += Random.Range(MinY, MaxY);
             platformPosition.x = Random.Range(-LevelWidth, LevelWidth);
 
-            Instantiate(PlatformPrefab, platformPosition, Quaternion.identity);
+            var platformObject = Instantiate(PlatformPrefab, platformPosition, Quaternion.identity);
+            var platform = platformObject.GetComponent<Platform>();
+            if (platform != null)
+                platform.CameraTransform = CameraTransform;
 
             if (i % 50 == 0 && i != 0)
             {

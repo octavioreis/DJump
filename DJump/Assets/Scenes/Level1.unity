@@ -325,6 +325,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114036716108213092, guid: 5157952338c098d44aa6b5fbbb235a4d,
+        type: 2}
+      propertyPath: CameraTransform
+      value: 
+      objectReference: {fileID: 2133131424}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5157952338c098d44aa6b5fbbb235a4d, type: 2}
   m_IsPrefabParent: 0
@@ -377,6 +382,7 @@ MonoBehaviour:
     type: 2}
   EnemyPrefab: {fileID: 1961261957320254, guid: 50b512b71cdaaee43b69a8422bef3500,
     type: 2}
+  CameraTransform: {fileID: 2133131424}
   NumberOfPlatforms: 200
   LevelWidth: 3
   MinY: 0.5

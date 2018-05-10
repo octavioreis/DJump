@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     public float HorizontalMaxLimit;
     public float HorizontalMinLimit;
     public float MovementSpeed = 7f;
-    public float HalfScreenHeight = 4.6f;
 
     private Rigidbody2D rigidBody;
     private float movement = 0f;
@@ -35,7 +34,7 @@ public class Player : MonoBehaviour
         }
 
         var distanceCameraToPlayer = CameraTransform.position.y - rigidBody.transform.position.y;
-        if (distanceCameraToPlayer >= HalfScreenHeight)
+        if (distanceCameraToPlayer >= GameManager.HalfScreenHeight)
             GameManager.GameLives = 0;
     }
 

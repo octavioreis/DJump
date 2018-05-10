@@ -10,14 +10,18 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         startingPosition = transform.position;
+
+        Invoke("DestroyBullet", 5);
+    }
+
+    private void DestroyBullet()
+    {
+        Destroy(gameObject);
     }
 
     private void Update()
     {
         transform.Translate(Vector2.up * Speed * Time.deltaTime);
-
-        if (transform.position.y - startingPosition.y > MaxBulletTravelDistance)
-            Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
