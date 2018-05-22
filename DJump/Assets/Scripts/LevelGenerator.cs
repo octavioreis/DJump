@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -12,31 +14,33 @@ public class LevelGenerator : MonoBehaviour
     public float MaxY = 1.8f;
 
     private Vector3 currentPlatformPosition;
+    private List<EnemySpawnInfo> enemySpawnSettings;
 
     private void Start()
     {
-        currentPlatformPosition = new Vector3();
-
+        InitializeEnemySpawnSettings();
         InitializePlatforms();
+    }
+
+    private void InitializeEnemySpawnSettings()
+    {
+        enemySpawnSettings = new List<EnemySpawnInfo>
+        {
+            new EnemySpawnInfo(30, 3),
+            new EnemySpawnInfo(20, 4),
+            new EnemySpawnInfo(10, 0)
+        };
     }
 
     private void InitializePlatforms()
     {
+        currentPlatformPosition = new Vector3();
+
         for (int i = 0; i < 15; i++)
-        {
-            BuildPlatform();
-
-            //if (i % 50 == 0 && i != 0)
-            //{
-            //    var enemyPosition = currentPlatformPosition;
-            //    enemyPosition.y += 1;
-
-            //    Instantiate(EnemyPrefab, enemyPosition, Quaternion.identity);
-            //}
-        }
+            SpawnPlatform();
     }
 
-    private void BuildPlatform()
+    private void SpawnPlatform()
     {
         currentPlatformPosition.y += Random.Range(MinY, MaxY);
         currentPlatformPosition.x = Random.Range(-LevelWidth, LevelWidth);
@@ -47,11 +51,65 @@ public class LevelGenerator : MonoBehaviour
             platform.CameraTransform = CameraTransform;
     }
 
+    private void SpawnEnemy()
+    {
+        var currentEnemySpawnSetting = enemySpawnSettings.FirstOrDefault();
+        if (currentEnemySpawnSetting == null)
+            return;
+
+        if (currentEnemySpawnSetting.PlatformSpacing > 0)
+        {
+            currentEnemySpawnSetting.PlatformSpacing--;
+        }
+        else
+        {
+            var enemyPosition = currentPlatformPosition;
+            enemyPosition.y += 1;
+            enemyPosition.x = Random.Range(-LevelWidth, LevelWidth);
+
+            Instantiate(EnemyPrefab, enemyPosition, Quaternion.identity);
+
+            currentEnemySpawnSetting.ResetPlatformSpacing();
+
+            if (currentEnemySpawnSetting.NumberOfSpawns <= 0)
+            {
+                if (enemySpawnSettings.Count > 1)
+                    enemySpawnSettings.Remove(currentEnemySpawnSetting);
+            }
+            else
+                currentEnemySpawnSetting.NumberOfSpawns--;
+        }
+    }
+
     private void Update()
     {
         for (int i = 0; i < PlatformsToBuild; i++)
-            BuildPlatform();
+        {
+            SpawnPlatform();
+            SpawnEnemy();
+        }
 
         PlatformsToBuild = 0;
+    }
+
+    private class EnemySpawnInfo
+    {
+        public int PlatformSpacing { get; set; }
+        public int NumberOfSpawns { get; set; }
+
+        private int platformSpacingBackup;
+
+        public EnemySpawnInfo(int platformSpacing, int numberOfSpawns)
+        {
+            PlatformSpacing = platformSpacing;
+            NumberOfSpawns = numberOfSpawns;
+
+            platformSpacingBackup = platformSpacing;
+        }
+
+        public void ResetPlatformSpacing()
+        {
+            PlatformSpacing = platformSpacingBackup;
+        }
     }
 }

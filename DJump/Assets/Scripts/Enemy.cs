@@ -13,8 +13,7 @@ public class Enemy : MonoBehaviour
         else if (string.Equals(other.gameObject.tag, "Bullet"))
         {
             GameManager.GameScore += Points;
+            Destroy(gameObject);
         }
-
-        Destroy(gameObject);
     }
 }
