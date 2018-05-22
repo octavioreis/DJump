@@ -2,6 +2,8 @@
 using System.Linq;
 using UnityEngine;
 
+//TO DO: aumentar o espaçamento das plataformas gradativamente, adicionar plataformas móveis
+
 public class LevelGenerator : MonoBehaviour
 {
     public static int PlatformsToBuild;
