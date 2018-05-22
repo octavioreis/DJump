@@ -383,10 +383,9 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 1961261957320254, guid: 50b512b71cdaaee43b69a8422bef3500,
     type: 2}
   CameraTransform: {fileID: 2133131424}
-  NumberOfPlatforms: 200
   LevelWidth: 3
-  MinY: 0.5
-  MaxY: 1.8
+  MinY: 1
+  MaxY: 3
 --- !u!1 &2133131420
 GameObject:
   m_ObjectHideFlags: 0

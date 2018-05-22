@@ -10,8 +10,8 @@ public class LevelGenerator : MonoBehaviour
     public GameObject EnemyPrefab;
     public Transform CameraTransform;
     public float LevelWidth = 3f;
-    public float MinY = .5f;
-    public float MaxY = 1.8f;
+    public float MinY = 1f;
+    public float MaxY = 3f;
 
     private Vector3 currentPlatformPosition;
     private List<EnemySpawnInfo> enemySpawnSettings;
@@ -35,6 +35,7 @@ public class LevelGenerator : MonoBehaviour
     private void InitializePlatforms()
     {
         currentPlatformPosition = new Vector3();
+        currentPlatformPosition.y = -1;
 
         for (int i = 0; i < 15; i++)
             SpawnPlatform();
