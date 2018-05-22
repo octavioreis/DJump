@@ -25,6 +25,9 @@ public class Platform : MonoBehaviour
     {
         var distanceCameraToPlatform = CameraTransform.position.y - transform.position.y;
         if (distanceCameraToPlatform >= GameManager.HalfScreenHeight + 2)
+        {
             Destroy(gameObject);
+            LevelGenerator.PlatformsToBuild++;
+        }
     }
 }

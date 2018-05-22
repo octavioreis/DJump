@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     public static int GameLives;
     public static float HalfScreenHeight = 4.6f;
 
-    //public Text LivesText;
     public Text ScoreText;
     public int StartingLives = 1;
     public string EndGameSceneName;
@@ -21,7 +20,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        //LivesText.text = string.Concat("Lives: ", GameLives);
         //ScoreText.text = string.Concat("Score: ", GameScore);
 
         if (GameLives == 0)

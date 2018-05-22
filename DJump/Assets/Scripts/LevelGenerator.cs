@@ -2,36 +2,56 @@
 
 public class LevelGenerator : MonoBehaviour
 {
+    public static int PlatformsToBuild;
 
     public GameObject PlatformPrefab;
     public GameObject EnemyPrefab;
     public Transform CameraTransform;
-    public int NumberOfPlatforms = 200;
     public float LevelWidth = 3f;
     public float MinY = .5f;
     public float MaxY = 1.8f;
 
+    private Vector3 currentPlatformPosition;
+
     private void Start()
     {
-        var platformPosition = new Vector3();
+        currentPlatformPosition = new Vector3();
 
-        for (int i = 0; i < NumberOfPlatforms; i++)
+        InitializePlatforms();
+    }
+
+    private void InitializePlatforms()
+    {
+        for (int i = 0; i < 15; i++)
         {
-            platformPosition.y += Random.Range(MinY, MaxY);
-            platformPosition.x = Random.Range(-LevelWidth, LevelWidth);
+            BuildPlatform();
 
-            var platformObject = Instantiate(PlatformPrefab, platformPosition, Quaternion.identity);
-            var platform = platformObject.GetComponent<Platform>();
-            if (platform != null)
-                platform.CameraTransform = CameraTransform;
+            //if (i % 50 == 0 && i != 0)
+            //{
+            //    var enemyPosition = currentPlatformPosition;
+            //    enemyPosition.y += 1;
 
-            if (i % 50 == 0 && i != 0)
-            {
-                var enemyPosition = platformPosition;
-                enemyPosition.y += 1;
-
-                Instantiate(EnemyPrefab, enemyPosition, Quaternion.identity);
-            }
+            //    Instantiate(EnemyPrefab, enemyPosition, Quaternion.identity);
+            //}
         }
+    }
+
+    private void BuildPlatform()
+    {
+        currentPlatformPosition.y += Random.Range(MinY, MaxY);
+        currentPlatformPosition.x = Random.Range(-LevelWidth, LevelWidth);
+
+        var platformObject = Instantiate(PlatformPrefab, currentPlatformPosition, Quaternion.identity);
+        var platform = platformObject.GetComponent<Platform>();
+        if (platform != null)
+            platform.CameraTransform = CameraTransform;
+    }
+
+    private void Update()
+    {
+        for (int i = 0; i < PlatformsToBuild; i++)
+            BuildPlatform();
+
+        PlatformsToBuild = 0;
     }
 }
