@@ -5,12 +5,8 @@ public class Bullet : MonoBehaviour
     public float Speed;
     public float MaxBulletTravelDistance;
 
-    private Vector3 startingPosition;
-
     private void Start()
     {
-        startingPosition = transform.position;
-
         Invoke("DestroyBullet", 5);
     }
 

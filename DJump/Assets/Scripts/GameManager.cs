@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static int GameScore;
     public static int GameLives;
+    public static float HalfScreenHeight = 4.6f;
 
     //public Text LivesText;
     public Text ScoreText;
