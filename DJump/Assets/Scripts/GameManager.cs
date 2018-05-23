@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public static int GameScore;
     public static int GameLives;
     public static float HalfScreenHeight = 4.6f;
+    public static float HorizontalMaxLimit = 3;
+    public static float HorizontalMinLimit = -3;
 
     public Text ScoreText;
     public int StartingLives = 1;

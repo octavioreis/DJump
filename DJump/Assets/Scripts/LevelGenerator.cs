@@ -9,7 +9,6 @@ public class LevelGenerator : MonoBehaviour
     public GameObject PlatformPrefab;
     public GameObject EnemyPrefab;
     public Transform CameraTransform;
-    public float LevelWidth = 3f;
 
     private Vector3 _currentPlatformPosition;
     private List<EnemySpawnInfo> _enemySpawnSettings;
@@ -38,11 +37,11 @@ public class LevelGenerator : MonoBehaviour
         _platformSpawnSettings = new List<PlatformSpawnInfo>
         {
             new PlatformSpawnInfo(15, 0.5f, 1.5f),
-            new PlatformSpawnInfo(25, 0.6f, 1.9f),
-            new PlatformSpawnInfo(30, 0.7f, 2.2f),
-            new PlatformSpawnInfo(35, 0.8f, 2.5f),
-            new PlatformSpawnInfo(40, 0.9f, 2.7f),
-            new PlatformSpawnInfo(0, 1f, 3f)
+            new PlatformSpawnInfo(25, 0.65f, 1.9f),
+            new PlatformSpawnInfo(30, 0.8f, 2.2f),
+            new PlatformSpawnInfo(35, 0.95f, 2.5f),
+            new PlatformSpawnInfo(40, 1.1f, 2.7f),
+            new PlatformSpawnInfo(0, 1.25f, 3f)
         };
     }
 
@@ -64,12 +63,14 @@ public class LevelGenerator : MonoBehaviour
             return;
 
         _currentPlatformPosition.y += Random.Range(currentPlatformSpawnSetting.MinY, currentPlatformSpawnSetting.MaxY);
-        _currentPlatformPosition.x = Random.Range(-LevelWidth, LevelWidth);
+        _currentPlatformPosition.x = Random.Range(GameManager.HorizontalMinLimit, GameManager.HorizontalMaxLimit);
 
         var platformObject = Instantiate(PlatformPrefab, _currentPlatformPosition, Quaternion.identity);
         var platform = platformObject.GetComponent<Platform>();
         if (platform != null)
+        {
             platform.CameraTransform = CameraTransform;
+        }
 
         if (currentPlatformSpawnSetting.NumberOfSpawns <= 0)
         {
@@ -94,7 +95,7 @@ public class LevelGenerator : MonoBehaviour
         {
             var enemyPosition = _currentPlatformPosition;
             enemyPosition.y += 1;
-            enemyPosition.x = Random.Range(-LevelWidth, LevelWidth);
+            enemyPosition.x = Random.Range(GameManager.HorizontalMinLimit, GameManager.HorizontalMaxLimit);
 
             Instantiate(EnemyPrefab, enemyPosition, Quaternion.identity);
 

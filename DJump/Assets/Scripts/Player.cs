@@ -6,8 +6,6 @@ public class Player : MonoBehaviour
     public GameObject Bullet;
     public Transform SocketTransform;
     public Transform CameraTransform;
-    public float HorizontalMaxLimit;
-    public float HorizontalMinLimit;
     public float MovementSpeed = 7f;
 
     private Rigidbody2D _rigidBody;
@@ -40,14 +38,14 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        var position = _rigidBody.transform.position;
+        if (position.x < GameManager.HorizontalMinLimit || position.x > GameManager.HorizontalMaxLimit)
+            position.x = -Mathf.Clamp(position.x, GameManager.HorizontalMinLimit, GameManager.HorizontalMaxLimit);
+
         var velocity = _rigidBody.velocity;
         velocity.x = _movement;
+
         _rigidBody.velocity = velocity;
-
-        var position = _rigidBody.transform.position;
-        if (position.x < HorizontalMinLimit || position.x > HorizontalMaxLimit)
-            position.x = -Mathf.Clamp(position.x, HorizontalMinLimit, HorizontalMaxLimit);
-
         _rigidBody.transform.position = new Vector2(position.x, position.y);
     }
 }
