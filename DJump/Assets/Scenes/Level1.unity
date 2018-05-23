@@ -136,8 +136,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 160549735}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.39, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.128, y: 0.021, z: 10}
+  m_LocalScale: {x: 1.9884341, y: 1.7025973, z: 1}
   m_Children: []
   m_Father: {fileID: 2133131424}
   m_RootOrder: 0
@@ -176,7 +176,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -10
-  m_Sprite: {fileID: 21300000, guid: 15dbaaef386e7ba40b7699c64b3dede1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 98013adb226820f4e81c6c56322f9ff1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -230,19 +230,9 @@ Prefab:
       propertyPath: CameraTransform
       value: 
       objectReference: {fileID: 2133131424}
-    - target: {fileID: 114286999877897296, guid: 13492c743f9b00149becca67bbde9d89,
-        type: 2}
-      propertyPath: SocketTransform
-      value: 
-      objectReference: {fileID: 303737225}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13492c743f9b00149becca67bbde9d89, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &303737225 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4280507184605520, guid: 13492c743f9b00149becca67bbde9d89,
-    type: 2}
-  m_PrefabInternal: {fileID: 303737224}
 --- !u!1 &722981393
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +289,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4813238904595398, guid: 5157952338c098d44aa6b5fbbb235a4d, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.5
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4813238904595398, guid: 5157952338c098d44aa6b5fbbb235a4d, type: 2}
       propertyPath: m_LocalPosition.z
@@ -383,7 +373,6 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 1961261957320254, guid: 50b512b71cdaaee43b69a8422bef3500,
     type: 2}
   CameraTransform: {fileID: 2133131424}
-  LevelWidth: 3
 --- !u!1 &2133131420
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,7 +415,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0

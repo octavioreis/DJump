@@ -104,18 +104,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.02233836, y: -0.2918879}
+  m_Offset: {x: -0.061212838, y: -0.89763427}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8, y: 0.8}
+    oldSize: {x: 1.428, y: 2.1}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.48726302, y: 0.21622425}
+  m_Size: {x: 0.8771688, y: 0.2858503}
   m_EdgeRadius: 0
 --- !u!114 &114286999877897296
 MonoBehaviour:
@@ -129,9 +129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 1647161418182684, guid: 735681ce517ddd443910e5771631e8d4, type: 2}
-  BulletSocket: {fileID: 4280507184605520}
-  HorizontalMaxLimit: 3.655
-  HorizontalMinLimit: -3.655
+  SocketTransform: {fileID: 4280507184605520}
+  CameraTransform: {fileID: 0}
   MovementSpeed: 7
 --- !u!212 &212708917770889868
 SpriteRenderer:
@@ -167,7 +166,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 27e8cbfa5bcac7c48acf9445ca160277, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 14f387343ca2e4246a198a965e16c079, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
