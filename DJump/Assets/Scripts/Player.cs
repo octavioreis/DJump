@@ -10,17 +10,17 @@ public class Player : MonoBehaviour
     public float HorizontalMinLimit;
     public float MovementSpeed = 7f;
 
-    private Rigidbody2D rigidBody;
-    private float movement = 0f;
+    private Rigidbody2D _rigidBody;
+    private float _movement = 0f;
 
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
+        _rigidBody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        movement = Input.GetAxis("Horizontal") * MovementSpeed;
+        _movement = Input.GetAxis("Horizontal") * MovementSpeed;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -33,21 +33,21 @@ public class Player : MonoBehaviour
             Instantiate(Bullet, SocketTransform.transform.position, SocketTransform.transform.rotation);
         }
 
-        var distanceCameraToPlayer = CameraTransform.position.y - rigidBody.transform.position.y;
+        var distanceCameraToPlayer = CameraTransform.position.y - _rigidBody.transform.position.y;
         if (distanceCameraToPlayer >= GameManager.HalfScreenHeight)
             GameManager.GameLives = 0;
     }
 
     void FixedUpdate()
     {
-        var velocity = rigidBody.velocity;
-        velocity.x = movement;
-        rigidBody.velocity = velocity;
+        var velocity = _rigidBody.velocity;
+        velocity.x = _movement;
+        _rigidBody.velocity = velocity;
 
-        var position = rigidBody.transform.position;
+        var position = _rigidBody.transform.position;
         if (position.x < HorizontalMinLimit || position.x > HorizontalMaxLimit)
             position.x = -Mathf.Clamp(position.x, HorizontalMinLimit, HorizontalMaxLimit);
 
-        rigidBody.transform.position = new Vector2(position.x, position.y);
+        _rigidBody.transform.position = new Vector2(position.x, position.y);
     }
 }

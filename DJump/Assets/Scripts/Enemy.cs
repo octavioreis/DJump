@@ -2,7 +2,7 @@
 
 public class Enemy : MonoBehaviour
 {
-    private int Points = 1;
+    private int _points = 1;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
         }
         else if (string.Equals(other.gameObject.tag, "Bullet"))
         {
-            GameManager.GameScore += Points;
+            GameManager.GameScore += _points;
             Destroy(gameObject);
         }
     }

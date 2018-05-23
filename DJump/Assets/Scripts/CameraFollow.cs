@@ -2,11 +2,11 @@
 
 public class CameraFollow : MonoBehaviour {
 
-	public Transform target;
+	public Transform Target;
 	
 	void LateUpdate ()
 	{
-		if (target.position.y > transform.position.y)
-			transform.position = new Vector3(transform.position.x, target.position.y, transform.position.z);
+		if (Target.position.y > transform.position.y)
+			transform.position = new Vector3(transform.position.x, Target.position.y, transform.position.z);
 	}
 }

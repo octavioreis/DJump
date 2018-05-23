@@ -6,7 +6,7 @@ public class GameOverManager : MonoBehaviour
     //public Text Score;
     public string MainMenuSceneName;
 
-    private int playerScore;
+    private int _playerScore;
 
     public void ReturnToMainMenu()
     {

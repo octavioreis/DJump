@@ -4,7 +4,7 @@ public class Platform : MonoBehaviour
 {
     public Transform CameraTransform;
 
-    float jumpForce = 11f;
+    private float _jumpForce = 11f;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -16,7 +16,7 @@ public class Platform : MonoBehaviour
         if (rigidBody != null)
         {
             var velocity = rigidBody.velocity;
-            velocity.y = jumpForce;
+            velocity.y = _jumpForce;
             rigidBody.velocity = velocity;
         }
     }

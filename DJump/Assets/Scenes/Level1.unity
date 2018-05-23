@@ -384,8 +384,6 @@ MonoBehaviour:
     type: 2}
   CameraTransform: {fileID: 2133131424}
   LevelWidth: 3
-  MinY: 1
-  MaxY: 3
 --- !u!1 &2133131420
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,4 +478,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afd1e66887c87d14ca2e95135e53f9ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1739352401}
+  Target: {fileID: 1739352401}

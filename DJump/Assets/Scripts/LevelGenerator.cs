@@ -2,8 +2,6 @@
 using System.Linq;
 using UnityEngine;
 
-//TO DO: aumentar o espaçamento das plataformas gradativamente, adicionar plataformas móveis
-
 public class LevelGenerator : MonoBehaviour
 {
     public static int PlatformsToBuild;
@@ -12,32 +10,48 @@ public class LevelGenerator : MonoBehaviour
     public GameObject EnemyPrefab;
     public Transform CameraTransform;
     public float LevelWidth = 3f;
-    public float MinY = 1f;
-    public float MaxY = 3f;
 
-    private Vector3 currentPlatformPosition;
-    private List<EnemySpawnInfo> enemySpawnSettings;
+    private Vector3 _currentPlatformPosition;
+    private List<EnemySpawnInfo> _enemySpawnSettings;
+    private List<PlatformSpawnInfo> _platformSpawnSettings;
 
     private void Start()
     {
         InitializeEnemySpawnSettings();
+        InitializePlatformSpawnSettings();
+
         InitializePlatforms();
     }
 
     private void InitializeEnemySpawnSettings()
     {
-        enemySpawnSettings = new List<EnemySpawnInfo>
+        _enemySpawnSettings = new List<EnemySpawnInfo>
         {
-            new EnemySpawnInfo(30, 3),
-            new EnemySpawnInfo(20, 4),
-            new EnemySpawnInfo(10, 0)
+            new EnemySpawnInfo(3, 30),
+            new EnemySpawnInfo(4, 20),
+            new EnemySpawnInfo(0, 10)
+        };
+    }
+
+    private void InitializePlatformSpawnSettings()
+    {
+        _platformSpawnSettings = new List<PlatformSpawnInfo>
+        {
+            new PlatformSpawnInfo(15, 0.5f, 1.5f),
+            new PlatformSpawnInfo(25, 0.6f, 1.9f),
+            new PlatformSpawnInfo(30, 0.7f, 2.2f),
+            new PlatformSpawnInfo(35, 0.8f, 2.5f),
+            new PlatformSpawnInfo(40, 0.9f, 2.7f),
+            new PlatformSpawnInfo(0, 1f, 3f)
         };
     }
 
     private void InitializePlatforms()
     {
-        currentPlatformPosition = new Vector3();
-        currentPlatformPosition.y = -1;
+        _currentPlatformPosition = new Vector3
+        {
+            y = -1
+        };
 
         for (int i = 0; i < 15; i++)
             SpawnPlatform();
@@ -45,39 +59,51 @@ public class LevelGenerator : MonoBehaviour
 
     private void SpawnPlatform()
     {
-        currentPlatformPosition.y += Random.Range(MinY, MaxY);
-        currentPlatformPosition.x = Random.Range(-LevelWidth, LevelWidth);
+        var currentPlatformSpawnSetting = _platformSpawnSettings.FirstOrDefault();
+        if (currentPlatformSpawnSetting == null)
+            return;
 
-        var platformObject = Instantiate(PlatformPrefab, currentPlatformPosition, Quaternion.identity);
+        _currentPlatformPosition.y += Random.Range(currentPlatformSpawnSetting.MinY, currentPlatformSpawnSetting.MaxY);
+        _currentPlatformPosition.x = Random.Range(-LevelWidth, LevelWidth);
+
+        var platformObject = Instantiate(PlatformPrefab, _currentPlatformPosition, Quaternion.identity);
         var platform = platformObject.GetComponent<Platform>();
         if (platform != null)
             platform.CameraTransform = CameraTransform;
+
+        if (currentPlatformSpawnSetting.NumberOfSpawns <= 0)
+        {
+            if (_platformSpawnSettings.Count > 1)
+                _platformSpawnSettings.Remove(currentPlatformSpawnSetting);
+        }
+        else
+            currentPlatformSpawnSetting.NumberOfSpawns--;
     }
 
     private void SpawnEnemy()
     {
-        var currentEnemySpawnSetting = enemySpawnSettings.FirstOrDefault();
+        var currentEnemySpawnSetting = _enemySpawnSettings.FirstOrDefault();
         if (currentEnemySpawnSetting == null)
             return;
 
-        if (currentEnemySpawnSetting.PlatformSpacing > 0)
+        if (currentEnemySpawnSetting.PlatformsBetweenSpawn > 0)
         {
-            currentEnemySpawnSetting.PlatformSpacing--;
+            currentEnemySpawnSetting.PlatformsBetweenSpawn--;
         }
         else
         {
-            var enemyPosition = currentPlatformPosition;
+            var enemyPosition = _currentPlatformPosition;
             enemyPosition.y += 1;
             enemyPosition.x = Random.Range(-LevelWidth, LevelWidth);
 
             Instantiate(EnemyPrefab, enemyPosition, Quaternion.identity);
 
-            currentEnemySpawnSetting.ResetPlatformSpacing();
+            currentEnemySpawnSetting.ResetPlatformSpacingCounter();
 
             if (currentEnemySpawnSetting.NumberOfSpawns <= 0)
             {
-                if (enemySpawnSettings.Count > 1)
-                    enemySpawnSettings.Remove(currentEnemySpawnSetting);
+                if (_enemySpawnSettings.Count > 1)
+                    _enemySpawnSettings.Remove(currentEnemySpawnSetting);
             }
             else
                 currentEnemySpawnSetting.NumberOfSpawns--;
@@ -95,24 +121,38 @@ public class LevelGenerator : MonoBehaviour
         PlatformsToBuild = 0;
     }
 
+    private class PlatformSpawnInfo
+    {
+        public int NumberOfSpawns { get; set; }
+        public float MinY { get; set; }
+        public float MaxY { get; set; }
+
+        public PlatformSpawnInfo(int numberOfSpawns, float minY, float maxY)
+        {
+            NumberOfSpawns = numberOfSpawns;
+            MinY = minY;
+            MaxY = maxY;
+        }
+    }
+
     private class EnemySpawnInfo
     {
-        public int PlatformSpacing { get; set; }
         public int NumberOfSpawns { get; set; }
+        public int PlatformsBetweenSpawn { get; set; }
 
-        private int platformSpacingBackup;
+        private readonly int _platformSpacingBackup;
 
-        public EnemySpawnInfo(int platformSpacing, int numberOfSpawns)
+        public EnemySpawnInfo(int numberOfSpawns, int platformsBetweenSpawn)
         {
-            PlatformSpacing = platformSpacing;
+            PlatformsBetweenSpawn = platformsBetweenSpawn;
             NumberOfSpawns = numberOfSpawns;
 
-            platformSpacingBackup = platformSpacing;
+            _platformSpacingBackup = platformsBetweenSpawn;
         }
 
-        public void ResetPlatformSpacing()
+        public void ResetPlatformSpacingCounter()
         {
-            PlatformSpacing = platformSpacingBackup;
+            PlatformsBetweenSpawn = _platformSpacingBackup;
         }
     }
 }
