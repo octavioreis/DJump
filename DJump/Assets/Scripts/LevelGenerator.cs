@@ -12,7 +12,7 @@ public class LevelGenerator : MonoBehaviour
 
     private Vector3 _currentPlatformPosition;
     private List<EnemySpawnInfo> _enemySpawnSettings;
-    private List<PlatformSpawnInfo> _platformSpawnSettings;
+    private List<PlatformSpawnCollection> _platformSpawnSettings;
 
     private void Start()
     {
@@ -34,14 +34,14 @@ public class LevelGenerator : MonoBehaviour
 
     private void InitializePlatformSpawnSettings()
     {
-        _platformSpawnSettings = new List<PlatformSpawnInfo>
+        _platformSpawnSettings = new List<PlatformSpawnCollection>
         {
-            new PlatformSpawnInfo(15, 0.5f, 1.5f),
-            new PlatformSpawnInfo(25, 0.65f, 1.9f),
-            new PlatformSpawnInfo(30, 0.8f, 2.2f),
-            new PlatformSpawnInfo(35, 0.95f, 2.5f),
-            new PlatformSpawnInfo(40, 1.1f, 2.7f),
-            new PlatformSpawnInfo(0, 1.25f, 3f)
+            new PlatformSpawnCollection(15, 0.5f, 1.5f),
+            new PlatformSpawnCollection(25, 0.65f, 1.9f),
+            new PlatformSpawnCollection(30, 0.8f, 2.2f),
+            new PlatformSpawnCollection(35, 0.95f, 2.5f),
+            new PlatformSpawnCollection(40, 1.1f, 2.7f),
+            new PlatformSpawnCollection(0, 1.25f, 3f)
         };
     }
 
@@ -58,11 +58,15 @@ public class LevelGenerator : MonoBehaviour
 
     private void SpawnPlatform()
     {
-        var currentPlatformSpawnSetting = _platformSpawnSettings.FirstOrDefault();
-        if (currentPlatformSpawnSetting == null)
+        var currentPlatformSpawnCollection = _platformSpawnSettings.FirstOrDefault();
+        if (currentPlatformSpawnCollection == null)
             return;
 
-        _currentPlatformPosition.y += Random.Range(currentPlatformSpawnSetting.MinY, currentPlatformSpawnSetting.MaxY);
+        var currentSpawnInfo = currentPlatformSpawnCollection.FetchNextPlatformSpawn();
+        if (currentSpawnInfo == null)
+            return;
+
+        _currentPlatformPosition.y += Random.Range(currentSpawnInfo.MinY, currentSpawnInfo.MaxY);
         _currentPlatformPosition.x = Random.Range(GameManager.HorizontalMinLimit, GameManager.HorizontalMaxLimit);
 
         var platformObject = Instantiate(PlatformPrefab, _currentPlatformPosition, Quaternion.identity);
@@ -72,13 +76,8 @@ public class LevelGenerator : MonoBehaviour
             platform.CameraTransform = CameraTransform;
         }
 
-        if (currentPlatformSpawnSetting.NumberOfSpawns <= 0)
-        {
-            if (_platformSpawnSettings.Count > 1)
-                _platformSpawnSettings.Remove(currentPlatformSpawnSetting);
-        }
-        else
-            currentPlatformSpawnSetting.NumberOfSpawns--;
+        if (currentPlatformSpawnCollection.IsEmpty() && _platformSpawnSettings.Count > 1)
+            _platformSpawnSettings.Remove(currentPlatformSpawnCollection);
     }
 
     private void SpawnEnemy()
@@ -120,20 +119,6 @@ public class LevelGenerator : MonoBehaviour
         }
 
         PlatformsToBuild = 0;
-    }
-
-    private class PlatformSpawnInfo
-    {
-        public int NumberOfSpawns { get; set; }
-        public float MinY { get; set; }
-        public float MaxY { get; set; }
-
-        public PlatformSpawnInfo(int numberOfSpawns, float minY, float maxY)
-        {
-            NumberOfSpawns = numberOfSpawns;
-            MinY = minY;
-            MaxY = maxY;
-        }
     }
 
     private class EnemySpawnInfo

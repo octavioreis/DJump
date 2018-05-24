@@ -320,6 +320,11 @@ Prefab:
       propertyPath: CameraTransform
       value: 
       objectReference: {fileID: 2133131424}
+    - target: {fileID: 50934811263025002, guid: 5157952338c098d44aa6b5fbbb235a4d,
+        type: 2}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5157952338c098d44aa6b5fbbb235a4d, type: 2}
   m_IsPrefabParent: 0
