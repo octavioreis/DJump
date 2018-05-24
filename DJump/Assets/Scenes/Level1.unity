@@ -230,6 +230,11 @@ Prefab:
       propertyPath: CameraTransform
       value: 
       objectReference: {fileID: 2133131424}
+    - target: {fileID: 114286999877897296, guid: 13492c743f9b00149becca67bbde9d89,
+        type: 2}
+      propertyPath: MovementSpeed
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13492c743f9b00149becca67bbde9d89, type: 2}
   m_IsPrefabParent: 0

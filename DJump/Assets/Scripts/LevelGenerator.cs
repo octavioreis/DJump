@@ -36,12 +36,12 @@ public class LevelGenerator : MonoBehaviour
     {
         _platformSpawnSettings = new List<PlatformSpawnCollection>
         {
-            new PlatformSpawnCollection(15, 0.5f, 1.5f),
-            new PlatformSpawnCollection(25, 0.65f, 1.9f),
-            new PlatformSpawnCollection(30, 0.8f, 2.2f),
-            new PlatformSpawnCollection(35, 0.95f, 2.5f),
-            new PlatformSpawnCollection(40, 1.1f, 2.7f),
-            new PlatformSpawnCollection(0, 1.25f, 3f)
+            new PlatformSpawnCollection(15, 0, 0.5f, 1.5f),
+            new PlatformSpawnCollection(25, 3, 0.65f, 1.9f),
+            new PlatformSpawnCollection(30, 6, 0.8f, 2.2f),
+            new PlatformSpawnCollection(35, 12, 0.95f, 2.5f),
+            new PlatformSpawnCollection(40, 24, 1.1f, 2.7f),
+            new PlatformSpawnCollection(0, 0, 1.25f, 3f)
         };
     }
 
@@ -74,6 +74,7 @@ public class LevelGenerator : MonoBehaviour
         if (platform != null)
         {
             platform.CameraTransform = CameraTransform;
+            platform.Stationary = currentSpawnInfo.Stationary;
         }
 
         if (currentPlatformSpawnCollection.IsEmpty() && _platformSpawnSettings.Count > 1)

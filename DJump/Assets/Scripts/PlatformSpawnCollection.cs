@@ -6,10 +6,12 @@ public class PlatformSpawnCollection
 {
     private readonly List<PlatformSpawn> _platformSpawns = new List<PlatformSpawn>();
 
-    public PlatformSpawnCollection(int numberOfSpawns, float minY, float maxY)
+    public PlatformSpawnCollection(int numberOfSpawns, int numberOfMoving, float minY, float maxY)
     {
+        var movingIndexes = GetRandomizedIntVector(numberOfMoving, 0, numberOfSpawns - 1);
+
         for (int i = 0; i < numberOfSpawns; i++)
-            _platformSpawns.Add(new PlatformSpawn(minY, maxY));
+            _platformSpawns.Add(new PlatformSpawn(minY, maxY, !movingIndexes.Contains(i)));
     }
 
     public PlatformSpawn FetchNextPlatformSpawn()
@@ -24,5 +26,15 @@ public class PlatformSpawnCollection
     public bool IsEmpty()
     {
         return !_platformSpawns.Any();
+    }
+
+    private int[] GetRandomizedIntVector(int vectorSize, int min, int max)
+    {
+        var randomInts = new int[vectorSize];
+
+        for (int i = 0; i < vectorSize; i++)
+            randomInts[i] = Random.Range(min, max);
+
+        return randomInts;
     }
 }
