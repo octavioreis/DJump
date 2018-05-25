@@ -36,12 +36,19 @@ public class LevelGenerator : MonoBehaviour
     {
         _platformSpawnSettings = new List<PlatformSpawnCollection>
         {
-            new PlatformSpawnCollection(15, 0, 0.5f, 1.5f),
-            new PlatformSpawnCollection(25, 3, 0.65f, 1.9f),
-            new PlatformSpawnCollection(30, 6, 0.8f, 2.2f),
-            new PlatformSpawnCollection(35, 12, 0.95f, 2.5f),
-            new PlatformSpawnCollection(40, 24, 1.1f, 2.7f),
-            new PlatformSpawnCollection(0, 0, 1.25f, 3f)
+            new PlatformSpawnFiniteCollection(15, 0, 0.5f, 1.5f),
+            new PlatformSpawnFiniteCollection(30, 3, 0.65f, 1.9f),
+            new PlatformSpawnFiniteCollection(30, 6, 0.65f, 1.9f),
+            new PlatformSpawnFiniteCollection(35, 9, 0.8f, 2.2f),
+            new PlatformSpawnFiniteCollection(35, 12, 0.8f, 2.2f),
+            new PlatformSpawnFiniteCollection(40, 15, 0.95f, 2.5f),
+            new PlatformSpawnFiniteCollection(40, 18, 0.95f, 2.5f),
+            new PlatformSpawnFiniteCollection(40, 21, 1.1f, 2.7f),
+            new PlatformSpawnFiniteCollection(40, 24, 1.1f, 2.7f),
+            new PlatformSpawnFiniteCollection(40, 27, 1.25f, 3f),
+            new PlatformSpawnFiniteCollection(40, 30, 1.25f, 3f),
+            new PlatformSpawnFiniteCollection(40, 35, 1.25f, 3f),
+            new PlatformSpawnInfiniteCollection(1.25f, 3f)
         };
     }
 
