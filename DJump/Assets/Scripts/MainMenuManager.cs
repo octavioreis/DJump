@@ -3,11 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public string NewGameSceneName;
+    public string LevelSelectorSceneName;
 
     public void StartNewGame()
     {
-        SceneManager.LoadScene(NewGameSceneName);
+        SceneManager.LoadScene(LevelSelectorSceneName);
     }
 
     public void QuitGame()
