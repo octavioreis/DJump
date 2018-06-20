@@ -6,6 +6,12 @@ public class LevelSelectorManager : MonoBehaviour
     public string Level1SceneName;
     public string Level2SceneName;
     public string Level3SceneName;
+    public string MainMenuSceneName;
+
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene(MainMenuSceneName);
+    }
 
     public void StartLevel1()
     {

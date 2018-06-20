@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        //ScoreText.text = string.Concat("Score: ", GameScore);
+        ScoreText.text = string.Concat("Score: ", GameScore);
 
         if (GameLives == 0)
         {
