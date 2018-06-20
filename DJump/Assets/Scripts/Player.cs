@@ -31,6 +31,10 @@ public class Player : MonoBehaviour
             Instantiate(Bullet, SocketTransform.transform.position, SocketTransform.transform.rotation);
         }
 
+        var yAxisDistanceTraveled = gameObject.transform.position.y;
+        if (yAxisDistanceTraveled > GameManager.GameScore)
+            GameManager.GameScore = Mathf.FloorToInt(yAxisDistanceTraveled);
+
         var distanceCameraToPlayer = CameraTransform.position.y - _rigidBody.transform.position.y;
         if (distanceCameraToPlayer >= GameManager.HalfScreenHeight)
             GameManager.GameLives = 0;
