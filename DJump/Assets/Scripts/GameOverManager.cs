@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameOverManager : MonoBehaviour
 {
-    //public Text Score;
+    public Text Score;
     public string MainMenuSceneName;
 
     private int _playerScore;
@@ -15,11 +16,11 @@ public class GameOverManager : MonoBehaviour
 
     private void Start()
     {
-        //playerScore = PlayerPrefs.GetInt("Score");
+        _playerScore = PlayerPrefs.GetInt("Score");
     }
 
     private void Update()
     {
-        //Score.text = string.Concat("Final Score: ", playerScore);
+        Score.text = string.Concat("Final Score: ", _playerScore);
     }
 }
