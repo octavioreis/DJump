@@ -570,7 +570,7 @@ Prefab:
         type: 2}
       propertyPath: EnemyPrefab
       value: 
-      objectReference: {fileID: 1731058248567400, guid: 04bfa7c110c3f904fbba91412f7c4c4a,
+      objectReference: {fileID: 1961261957320254, guid: 50b512b71cdaaee43b69a8422bef3500,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 268d7ecb377372047a32d37ac4ca22da, type: 2}
