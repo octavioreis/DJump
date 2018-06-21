@@ -449,12 +449,12 @@ Prefab:
     - target: {fileID: 61599219235151222, guid: 13492c743f9b00149becca67bbde9d89,
         type: 2}
       propertyPath: m_Offset.y
-      value: -0.9927396
+      value: -1.0128208
       objectReference: {fileID: 0}
     - target: {fileID: 61599219235151222, guid: 13492c743f9b00149becca67bbde9d89,
         type: 2}
       propertyPath: m_Size.y
-      value: 0.045159698
+      value: 0.004997015
       objectReference: {fileID: 0}
     - target: {fileID: 114286999877897296, guid: 13492c743f9b00149becca67bbde9d89,
         type: 2}

@@ -131,7 +131,7 @@ MonoBehaviour:
   Bullet: {fileID: 1647161418182684, guid: 735681ce517ddd443910e5771631e8d4, type: 2}
   SocketTransform: {fileID: 4280507184605520}
   CameraTransform: {fileID: 0}
-  MovementSpeed: 7
+  MovementSpeed: 5
 --- !u!212 &212708917770889868
 SpriteRenderer:
   m_ObjectHideFlags: 1
