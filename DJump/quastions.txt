@@ -1,0 +1,5 @@
+dificuldade de completar um nível?
+dificuldade dos inimigos?
+dificuldade das plataformas?
+game feel?
+replayability?
