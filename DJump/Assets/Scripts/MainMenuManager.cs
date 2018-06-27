@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
     public string LevelSelectorSceneName;
+    public string HighScoresSceneName;
 
     public void Start()
     {
@@ -17,6 +18,11 @@ public class MainMenuManager : MonoBehaviour
     public void StartNewGame()
     {
         SceneManager.LoadScene(LevelSelectorSceneName);
+    }
+
+    public void OpenHighScores()
+    {
+        SceneManager.LoadScene(HighScoresSceneName);
     }
 
     public void QuitGame()
