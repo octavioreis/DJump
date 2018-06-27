@@ -54,7 +54,7 @@ public class LevelSelectorManager : MonoBehaviour
 
     public void StartLevel1()
     {
-        PlayerPrefs.SetString(MainMenuManager.CurrentLevelKey, MainMenuManager.Levels.Level1.ToString());
+        PlayerPrefs.SetString(MainMenuManager.CurrentLevelKey, Levels.Level1.ToString());
         PlayerPrefs.SetString(MainMenuManager.FreeRunKey, _isFreeRun.ToString());
 
         SceneManager.LoadScene(Level1SceneName);
@@ -62,7 +62,7 @@ public class LevelSelectorManager : MonoBehaviour
 
     public void StartLevel2()
     {
-        PlayerPrefs.SetString(MainMenuManager.CurrentLevelKey, MainMenuManager.Levels.Level2.ToString());
+        PlayerPrefs.SetString(MainMenuManager.CurrentLevelKey, Levels.Level2.ToString());
         PlayerPrefs.SetString(MainMenuManager.FreeRunKey, _isFreeRun.ToString());
 
         SceneManager.LoadScene(Level2SceneName);
@@ -70,7 +70,7 @@ public class LevelSelectorManager : MonoBehaviour
 
     public void StartLevel3()
     {
-        PlayerPrefs.SetString(MainMenuManager.CurrentLevelKey, MainMenuManager.Levels.Level3.ToString());
+        PlayerPrefs.SetString(MainMenuManager.CurrentLevelKey, Levels.Level3.ToString());
         PlayerPrefs.SetString(MainMenuManager.FreeRunKey, _isFreeRun.ToString());
 
         SceneManager.LoadScene(Level3SceneName);

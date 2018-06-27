@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static MainMenuManager.Levels CurrentLevel;
+    public static Levels CurrentLevel;
     public static bool IsFreeRun;
     public static int GameScore;
     public static int GameLives;
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         if (!bool.TryParse(PlayerPrefs.GetString(MainMenuManager.FreeRunKey), out isFreeRun))
             isFreeRun = true;
 
-        CurrentLevel = (MainMenuManager.Levels)Enum.Parse(typeof(MainMenuManager.Levels), PlayerPrefs.GetString(MainMenuManager.CurrentLevelKey));
+        CurrentLevel = (Levels)Enum.Parse(typeof(Levels), PlayerPrefs.GetString(MainMenuManager.CurrentLevelKey));
         IsFreeRun = isFreeRun;
         GameLives = StartingLives;
         GameScore = 0;
@@ -41,15 +41,15 @@ public class GameManager : MonoBehaviour
         {
             switch (CurrentLevel)
             {
-                case MainMenuManager.Levels.Level1:
+                case Levels.Level1:
                     if (GameScore >= DistanceNeededToFinishLevel1)
                         EndGame();
                     break;
-                case MainMenuManager.Levels.Level2:
+                case Levels.Level2:
                     if (GameScore >= DistanceNeededToFinishLevel2)
                         EndGame();
                     break;
-                case MainMenuManager.Levels.Level3:
+                case Levels.Level3:
                     if (GameScore >= DistanceNeededToFinishLevel3)
                         EndGame();
                     break;
