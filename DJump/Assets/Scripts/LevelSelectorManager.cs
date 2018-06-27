@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -11,35 +12,37 @@ public class LevelSelectorManager : MonoBehaviour
     public Button Level1Button;
     public Button Level2Button;
     public Button Level3Button;
+    public InputField PlayerNameInputField;
 
     private bool _isFreeRun;
+    private readonly string _placeholderPlayerName = "ABC";
 
     public void Start()
     {
-        bool level1Enabled;
         bool level2Enabled;
         bool level3Enabled;
 
-        if (!bool.TryParse(PlayerPrefs.GetString(Keys.Level1Enabled), out level1Enabled))
-            level1Enabled = true;
-
-        if (!bool.TryParse(PlayerPrefs.GetString(Keys.Level2Enabled), out level2Enabled))
+        if (!bool.TryParse(PlayerPrefs.GetString(Consts.Level2Enabled), out level2Enabled))
             level2Enabled = true;
 
-        if (!bool.TryParse(PlayerPrefs.GetString(Keys.Level3Enabled), out level3Enabled))
+        if (!bool.TryParse(PlayerPrefs.GetString(Consts.Level3Enabled), out level3Enabled))
             level3Enabled = true;
 
-        if (!bool.TryParse(PlayerPrefs.GetString(Keys.FreeRunEnabled), out _isFreeRun))
+        if (!bool.TryParse(PlayerPrefs.GetString(Consts.FreeRunEnabled), out _isFreeRun))
             _isFreeRun = true;
-
-        if (level1Enabled)
-            Level1Button.interactable = Level1Button.enabled = true;
 
         if (level2Enabled)
             Level2Button.interactable = Level2Button.enabled = true;
 
         if (level3Enabled)
             Level3Button.interactable = Level3Button.enabled = true;
+
+        if (!_isFreeRun)
+            PlayerNameInputField.gameObject.SetActive(false);
+
+        var playerName = PlayerPrefs.GetString(Consts.PlayerName);
+        if (!playerName.IsNullOrWhiteSpace() && !playerName.Equals(_placeholderPlayerName))
+            PlayerNameInputField.text = playerName;
     }
 
     public void ReturnToMainMenu()
@@ -49,25 +52,41 @@ public class LevelSelectorManager : MonoBehaviour
 
     public void StartLevel1()
     {
-        PlayerPrefs.SetString(Keys.CurrentLevel, Levels.Level1.ToString());
-        PlayerPrefs.SetString(Keys.FreeRun, _isFreeRun.ToString());
+        SetPlayerPrefs(Levels.Level1);
 
         SceneManager.LoadScene(Level1SceneName);
     }
 
     public void StartLevel2()
     {
-        PlayerPrefs.SetString(Keys.CurrentLevel, Levels.Level2.ToString());
-        PlayerPrefs.SetString(Keys.FreeRun, _isFreeRun.ToString());
+        SetPlayerPrefs(Levels.Level2);
 
         SceneManager.LoadScene(Level2SceneName);
     }
 
     public void StartLevel3()
     {
-        PlayerPrefs.SetString(Keys.CurrentLevel, Levels.Level3.ToString());
-        PlayerPrefs.SetString(Keys.FreeRun, _isFreeRun.ToString());
+        SetPlayerPrefs(Levels.Level3);
 
         SceneManager.LoadScene(Level3SceneName);
+    }
+
+    private void SetPlayerPrefs(Levels selectedLevel)
+    {
+        PlayerPrefs.SetString(Consts.CurrentLevel, selectedLevel.ToString());
+        PlayerPrefs.SetString(Consts.FreeRun, _isFreeRun.ToString());
+        PlayerPrefs.SetString(Consts.PlayerName, GetPlayerName());
+    }
+
+    private string GetPlayerName()
+    {
+        if (!_isFreeRun)
+            return _placeholderPlayerName;
+
+        var playerName = PlayerNameInputField.text;
+        if (playerName.IsNullOrWhiteSpace())
+            playerName = _placeholderPlayerName;
+
+        return playerName;
     }
 }

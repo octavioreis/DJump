@@ -9,10 +9,9 @@ public class MainMenuManager : MonoBehaviour
     {
         SaveManager.Instance.Load();
 
-        PlayerPrefs.SetString(Keys.Level1Enabled, SaveManager.Instance.Level1Enabled.ToString());
-        PlayerPrefs.SetString(Keys.Level2Enabled, SaveManager.Instance.Level2Enabled.ToString());
-        PlayerPrefs.SetString(Keys.Level3Enabled, SaveManager.Instance.Level3Enabled.ToString());
-        PlayerPrefs.SetString(Keys.FreeRunEnabled, SaveManager.Instance.FreeRunEnabled.ToString());
+        PlayerPrefs.SetString(Consts.Level2Enabled, SaveManager.Instance.Level2Enabled.ToString());
+        PlayerPrefs.SetString(Consts.Level3Enabled, SaveManager.Instance.Level3Enabled.ToString());
+        PlayerPrefs.SetString(Consts.FreeRunEnabled, SaveManager.Instance.FreeRunEnabled.ToString());
     }
 
     public void StartNewGame()

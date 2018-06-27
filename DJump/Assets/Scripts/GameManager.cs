@@ -26,13 +26,10 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        bool isFreeRun;
+        if (!bool.TryParse(PlayerPrefs.GetString(Consts.FreeRun), out _isFreeRun))
+            _isFreeRun = true;
 
-        if (!bool.TryParse(PlayerPrefs.GetString(Keys.FreeRun), out isFreeRun))
-            isFreeRun = true;
-
-        _currentLevel = (Levels)Enum.Parse(typeof(Levels), PlayerPrefs.GetString(Keys.CurrentLevel));
-        _isFreeRun = isFreeRun;
+        _currentLevel = (Levels)Enum.Parse(typeof(Levels), PlayerPrefs.GetString(Consts.CurrentLevel));
 
         switch (_currentLevel)
         {
@@ -73,8 +70,8 @@ public class GameManager : MonoBehaviour
 
     private void EndGame(bool playerDied = false)
     {
-        PlayerPrefs.SetString(Keys.PlayerDied, playerDied.ToString());
-        PlayerPrefs.SetInt(Keys.Score, GameScore);
+        PlayerPrefs.SetString(Consts.PlayerDied, playerDied.ToString());
+        PlayerPrefs.SetInt(Consts.Score, GameScore);
         SceneManager.LoadScene(EndGameSceneName);
     }
 }

@@ -12,8 +12,9 @@ public class GameOverManager : MonoBehaviour
 
     private Levels _currentLevel;
     private bool _isFreeRun;
-    private int _playerScore;
     private bool _playerDied;
+    private string _playerName;
+    private int _playerScore;
 
     public void ReturnToMainMenu()
     {
@@ -22,14 +23,15 @@ public class GameOverManager : MonoBehaviour
 
     public void Start()
     {
-        if (!bool.TryParse(PlayerPrefs.GetString(Keys.FreeRun), out _isFreeRun))
+        if (!bool.TryParse(PlayerPrefs.GetString(Consts.FreeRun), out _isFreeRun))
             _isFreeRun = true;
 
-        if (!bool.TryParse(PlayerPrefs.GetString(Keys.PlayerDied), out _playerDied))
+        if (!bool.TryParse(PlayerPrefs.GetString(Consts.PlayerDied), out _playerDied))
             _playerDied = true;
 
-        _currentLevel = (Levels)Enum.Parse(typeof(Levels), PlayerPrefs.GetString(Keys.CurrentLevel));
-        _playerScore = PlayerPrefs.GetInt(Keys.Score);
+        _currentLevel = (Levels)Enum.Parse(typeof(Levels), PlayerPrefs.GetString(Consts.CurrentLevel));
+        _playerName = PlayerPrefs.GetString(Consts.PlayerName);
+        _playerScore = PlayerPrefs.GetInt(Consts.Score);
 
         UpdateSave();
 
@@ -68,8 +70,6 @@ public class GameOverManager : MonoBehaviour
 
     private void UpdateSave()
     {
-        SaveManager.Instance.Level1Enabled = true;
-
         if (!_isFreeRun)
         {
             if (!_playerDied)
@@ -90,7 +90,7 @@ public class GameOverManager : MonoBehaviour
         }
         else
         {
-            //save score
+            SaveManager.Instance.PlayerScores.Add(new PlayerScore(_playerName, _playerScore));
         }
 
         SaveManager.Instance.Save();
