@@ -5,7 +5,7 @@ public class Platform : MonoBehaviour
     public Transform CameraTransform;
     public bool Stationary = true;
 
-    private float _jumpForce = 11f;
+    private float _jumpForce = 11.5f;
     private float _movement = 4f;
     private Rigidbody2D _rigidBody;
 

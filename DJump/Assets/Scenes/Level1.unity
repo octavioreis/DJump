@@ -441,26 +441,6 @@ Prefab:
       propertyPath: CameraTransform
       value: 
       objectReference: {fileID: 2133131424}
-    - target: {fileID: 114286999877897296, guid: 13492c743f9b00149becca67bbde9d89,
-        type: 2}
-      propertyPath: MovementSpeed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 61599219235151222, guid: 13492c743f9b00149becca67bbde9d89,
-        type: 2}
-      propertyPath: m_Offset.y
-      value: -1.0128208
-      objectReference: {fileID: 0}
-    - target: {fileID: 61599219235151222, guid: 13492c743f9b00149becca67bbde9d89,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 0.004997015
-      objectReference: {fileID: 0}
-    - target: {fileID: 114286999877897296, guid: 13492c743f9b00149becca67bbde9d89,
-        type: 2}
-      propertyPath: StartingAnchorPoint
-      value: 
-      objectReference: {fileID: 2049449281}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13492c743f9b00149becca67bbde9d89, type: 2}
   m_IsPrefabParent: 0
@@ -874,11 +854,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 81ef2f0ee31b79e44986693ced7db624, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &2049449281 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4228864326083174, guid: 81ef2f0ee31b79e44986693ced7db624,
-    type: 2}
-  m_PrefabInternal: {fileID: 2049449280}
 --- !u!1 &2133131420
 GameObject:
   m_ObjectHideFlags: 0
