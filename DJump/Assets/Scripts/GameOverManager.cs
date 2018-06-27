@@ -44,20 +44,20 @@ public class GameOverManager : MonoBehaviour
         {
             TitleText.text = "LEVEL COMPLETED";
 
-            if (_currentLevel == Levels.Level1)
+            switch (_currentLevel)
             {
-                ContentUnlockedText.text = "You unlocked the Sky stage!";
-                ContentUnlockedText.enabled = true;
-            }
-            else if (_currentLevel == Levels.Level2)
-            {
-                ContentUnlockedText.text = "You unlocked the Space stage!";
-                ContentUnlockedText.enabled = true;
-            }
-            else if (_currentLevel == Levels.Level3)
-            {
-                ContentUnlockedText.text = "You beat all stages!\nFrom now on all games are in infinite mode!";
-                ContentUnlockedText.enabled = true;
+                case Levels.Level1:
+                    ContentUnlockedText.text = "You unlocked the Sky stage!";
+                    ContentUnlockedText.enabled = true;
+                    break;
+                case Levels.Level2:
+                    ContentUnlockedText.text = "You unlocked the Space stage!";
+                    ContentUnlockedText.enabled = true;
+                    break;
+                case Levels.Level3:
+                    ContentUnlockedText.text = "You beat all stages!\nFrom now on all games are in infinite mode!";
+                    ContentUnlockedText.enabled = true;
+                    break;
             }
         }
         else
@@ -84,8 +84,6 @@ public class GameOverManager : MonoBehaviour
                         break;
                     case Levels.Level3:
                         SaveManager.Instance.FreeRunEnabled = true;
-                        break;
-                    default:
                         break;
                 }
             }

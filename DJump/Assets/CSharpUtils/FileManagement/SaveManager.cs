@@ -22,10 +22,10 @@ public class SaveManager
     private readonly string _saveFilePath = @".\save.xml";
     private readonly string _saveXmlTemplate =
         "<RatJump>"
-      + "   <Levels freeRunEnabled=\"false\">"
-      + "     <Level1 enabled=\"true\" />"
-      + "     <Level2 enabled=\"false\" />"
-      + "     <Level3 enabled=\"false\" />"
+      + "   <Levels freeRunEnabled=\"False\">"
+      + "     <Level1 enabled=\"True\" />"
+      + "     <Level2 enabled=\"False\" />"
+      + "     <Level3 enabled=\"False\" />"
       + "   </Levels>"
       + "</RatJump>";
 
@@ -78,9 +78,7 @@ public class SaveManager
         {
             var enabledAttribute = levelNode.Attributes().FirstOrDefault(a => a.Name.LocalName.Equals("enabled", StringComparison.OrdinalIgnoreCase));
             if (enabledAttribute != null)
-            {
                 return enabledAttribute.Value.Equals("true", StringComparison.OrdinalIgnoreCase);
-            }
         }
 
         return false;
@@ -90,9 +88,7 @@ public class SaveManager
     {
         var freeRunEnabledAttribute = levelsNode.Attributes().FirstOrDefault(e => e.Name.LocalName.Equals("freeRunEnabled", StringComparison.OrdinalIgnoreCase));
         if (freeRunEnabledAttribute != null)
-        {
             return freeRunEnabledAttribute.Value.Equals("true", StringComparison.OrdinalIgnoreCase);
-        }
 
         return false;
     }
