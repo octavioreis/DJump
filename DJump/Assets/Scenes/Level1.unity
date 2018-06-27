@@ -444,7 +444,7 @@ Prefab:
     - target: {fileID: 114286999877897296, guid: 13492c743f9b00149becca67bbde9d89,
         type: 2}
       propertyPath: MovementSpeed
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 61599219235151222, guid: 13492c743f9b00149becca67bbde9d89,
         type: 2}
@@ -570,7 +570,7 @@ Prefab:
         type: 2}
       propertyPath: EnemyPrefab
       value: 
-      objectReference: {fileID: 1961261957320254, guid: 50b512b71cdaaee43b69a8422bef3500,
+      objectReference: {fileID: 1731058248567400, guid: 04bfa7c110c3f904fbba91412f7c4c4a,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 268d7ecb377372047a32d37ac4ca22da, type: 2}
