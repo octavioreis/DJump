@@ -16,7 +16,7 @@ public class GameOverManager : MonoBehaviour
 
     private void Start()
     {
-        _playerScore = PlayerPrefs.GetInt("Score");
+        _playerScore = PlayerPrefs.GetInt(MainMenuManager.ScoreKey);
     }
 
     private void Update()
