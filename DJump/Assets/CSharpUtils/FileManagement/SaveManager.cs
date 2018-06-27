@@ -3,10 +3,24 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-public static class SaveManager
+public class SaveManager
 {
-    private static readonly string _saveFilePath = @".\save.xml";
-    private static readonly string _saveXmlTemplate =
+    private static SaveManager _instance;
+    public static SaveManager Instance
+    {
+        get
+        {
+            return _instance ?? (_instance = new SaveManager());
+        }
+    }
+
+    public bool Level1Enabled { get; set; }
+    public bool Level2Enabled { get; set; }
+    public bool Level3Enabled { get; set; }
+    public bool FreeRunEnabled { get; set; }
+
+    private readonly string _saveFilePath = @".\save.xml";
+    private readonly string _saveXmlTemplate =
         "<RatJump>"
       + "   <Levels freeRunEnabled=\"false\">"
       + "     <Level1 enabled=\"true\" />"
@@ -15,17 +29,13 @@ public static class SaveManager
       + "   </Levels>"
       + "</RatJump>";
 
-    public static void LoadSave(
-        out bool level1Enabled,
-        out bool level2Enabled,
-        out bool level3Enabled,
-        out bool freeRunEnabled)
+    private SaveManager()
+    {
+    }
+
+    public void Load()
     {
         XElement saveXml;
-        level1Enabled = false;
-        level2Enabled = false;
-        level3Enabled = false;
-        freeRunEnabled = false;
 
         if (File.Exists(_saveFilePath))
         {
@@ -40,14 +50,28 @@ public static class SaveManager
         var levelsNode = saveXml.Elements().FirstOrDefault(n => n.Name.LocalName.Equals("Levels", StringComparison.OrdinalIgnoreCase));
         if (levelsNode != null)
         {
-            level1Enabled = CheckIfLevelIsEnabled(levelsNode, Levels.Level1.ToString());
-            level2Enabled = CheckIfLevelIsEnabled(levelsNode, Levels.Level2.ToString());
-            level3Enabled = CheckIfLevelIsEnabled(levelsNode, Levels.Level3.ToString());
-            freeRunEnabled = CheckIfFreeRunIsEnabled(levelsNode);
+            Level1Enabled = CheckIfLevelIsEnabled(levelsNode, Levels.Level1.ToString());
+            Level2Enabled = CheckIfLevelIsEnabled(levelsNode, Levels.Level2.ToString());
+            Level3Enabled = CheckIfLevelIsEnabled(levelsNode, Levels.Level3.ToString());
+            FreeRunEnabled = CheckIfFreeRunIsEnabled(levelsNode);
         }
     }
 
-    private static bool CheckIfLevelIsEnabled(XElement levelsNode, string levelName)
+    public void Save()
+    {
+        var saveXml = XElement.Parse(
+            "<RatJump>"
+          + "   <Levels freeRunEnabled=\"" + FreeRunEnabled.ToString() + "\">"
+          + "     <Level1 enabled=\"" + Level1Enabled.ToString() + "\" />"
+          + "     <Level2 enabled=\"" + Level2Enabled.ToString() + "\" />"
+          + "     <Level3 enabled=\"" + Level3Enabled.ToString() + "\" />"
+          + "   </Levels>"
+          + "</RatJump>");
+
+        saveXml.Save(_saveFilePath);
+    }
+
+    private bool CheckIfLevelIsEnabled(XElement levelsNode, string levelName)
     {
         var levelNode = levelsNode.Elements().FirstOrDefault(e => e.Name.LocalName.Equals(levelName, StringComparison.OrdinalIgnoreCase));
         if (levelNode != null)
@@ -62,7 +86,7 @@ public static class SaveManager
         return false;
     }
 
-    private static bool CheckIfFreeRunIsEnabled(XElement levelsNode)
+    private bool CheckIfFreeRunIsEnabled(XElement levelsNode)
     {
         var freeRunEnabledAttribute = levelsNode.Attributes().FirstOrDefault(e => e.Name.LocalName.Equals("freeRunEnabled", StringComparison.OrdinalIgnoreCase));
         if (freeRunEnabledAttribute != null)

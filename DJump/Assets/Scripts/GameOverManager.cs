@@ -1,26 +1,87 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOverManager : MonoBehaviour
 {
-    public Text Score;
+    public Text FreeRunUnlockedText;
+    public Text ScoreText;
+    public Text TitleText;
     public string MainMenuSceneName;
 
-    private int _playerScore = 0;
+    private Levels _currentLevel;
+    private bool _isFreeRun;
+    private int _playerScore;
+    private bool _playerDied;
 
     public void ReturnToMainMenu()
     {
         SceneManager.LoadScene(MainMenuSceneName);
     }
 
-    private void Start()
+    public void Start()
     {
-        _playerScore = PlayerPrefs.GetInt(MainMenuManager.ScoreKey);
+        if (!bool.TryParse(PlayerPrefs.GetString(Keys.FreeRun), out _isFreeRun))
+            _isFreeRun = true;
+
+        if (!bool.TryParse(PlayerPrefs.GetString(Keys.PlayerDied), out _playerDied))
+            _playerDied = true;
+
+        _currentLevel = (Levels)Enum.Parse(typeof(Levels), PlayerPrefs.GetString(Keys.CurrentLevel));
+        _playerScore = PlayerPrefs.GetInt(Keys.Score);
+
+        UpdateSave();
+
+        FreeRunUnlockedText.enabled = false;
     }
 
-    private void Update()
+    public void Update()
     {
-        Score.text = string.Concat("Final Score: ", _playerScore);
+        ScoreText.text = string.Concat("Final Score: ", _playerScore);
+
+        if (!_isFreeRun && !_playerDied)
+        {
+            TitleText.text = "LEVEL COMPLETED";
+
+            if (_currentLevel == Levels.Level3)
+                FreeRunUnlockedText.enabled = true;
+        }
+        else
+        {
+            TitleText.text = "GAME OVER";
+        }
+    }
+
+    private void UpdateSave()
+    {
+        SaveManager.Instance.Level1Enabled = true;
+
+        if (!_isFreeRun)
+        {
+            if (!_playerDied)
+            {
+                switch (_currentLevel)
+                {
+                    case Levels.Level1:
+                        SaveManager.Instance.Level2Enabled = true;
+                        break;
+                    case Levels.Level2:
+                        SaveManager.Instance.Level3Enabled = true;
+                        break;
+                    case Levels.Level3:
+                        SaveManager.Instance.FreeRunEnabled = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        else
+        {
+            //save score
+        }
+
+        SaveManager.Instance.Save();
     }
 }

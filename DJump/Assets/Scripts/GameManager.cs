@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static Levels CurrentLevel;
-    public static bool IsFreeRun;
     public static int GameScore;
     public static int GameLives;
     public static float HalfScreenHeight = 4.6f;
@@ -20,15 +18,19 @@ public class GameManager : MonoBehaviour
     public int StartingLives = 1;
     public string EndGameSceneName;
 
+    private Levels _currentLevel;
+    private bool _isFreeRun;
+
     public void Start()
     {
         bool isFreeRun;
 
-        if (!bool.TryParse(PlayerPrefs.GetString(MainMenuManager.FreeRunKey), out isFreeRun))
+        if (!bool.TryParse(PlayerPrefs.GetString(Keys.FreeRun), out isFreeRun))
             isFreeRun = true;
 
-        CurrentLevel = (Levels)Enum.Parse(typeof(Levels), PlayerPrefs.GetString(MainMenuManager.CurrentLevelKey));
-        IsFreeRun = isFreeRun;
+        _currentLevel = (Levels)Enum.Parse(typeof(Levels), PlayerPrefs.GetString(Keys.CurrentLevel));
+        _isFreeRun = isFreeRun;
+
         GameLives = StartingLives;
         GameScore = 0;
     }
@@ -37,9 +39,9 @@ public class GameManager : MonoBehaviour
     {
         ScoreText.text = string.Concat("Score: ", GameScore);
 
-        if (!IsFreeRun)
+        if (!_isFreeRun)
         {
-            switch (CurrentLevel)
+            switch (_currentLevel)
             {
                 case Levels.Level1:
                     if (GameScore >= DistanceNeededToFinishLevel1)
@@ -59,12 +61,13 @@ public class GameManager : MonoBehaviour
         }
 
         if (GameLives == 0)
-            EndGame();
+            EndGame(true);
     }
 
-    private void EndGame()
+    private void EndGame(bool playerDied = false)
     {
-        PlayerPrefs.SetInt(MainMenuManager.ScoreKey, GameScore);
+        PlayerPrefs.SetString(Keys.PlayerDied, playerDied.ToString());
+        PlayerPrefs.SetInt(Keys.Score, GameScore);
         SceneManager.LoadScene(EndGameSceneName);
     }
 }

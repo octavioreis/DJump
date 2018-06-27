@@ -11,7 +11,6 @@ public class LevelSelectorManager : MonoBehaviour
     public Button Level1Button;
     public Button Level2Button;
     public Button Level3Button;
-    public Toggle FreeRunToggle;
 
     private bool _isFreeRun;
 
@@ -20,19 +19,18 @@ public class LevelSelectorManager : MonoBehaviour
         bool level1Enabled;
         bool level2Enabled;
         bool level3Enabled;
-        bool freeRunEnabled;
 
-        if (!bool.TryParse(PlayerPrefs.GetString(MainMenuManager.Level1EnabledKey), out level1Enabled))
+        if (!bool.TryParse(PlayerPrefs.GetString(Keys.Level1Enabled), out level1Enabled))
             level1Enabled = true;
 
-        if (!bool.TryParse(PlayerPrefs.GetString(MainMenuManager.Level2EnabledKey), out level2Enabled))
+        if (!bool.TryParse(PlayerPrefs.GetString(Keys.Level2Enabled), out level2Enabled))
             level2Enabled = true;
 
-        if (!bool.TryParse(PlayerPrefs.GetString(MainMenuManager.Level3EnabledKey), out level3Enabled))
+        if (!bool.TryParse(PlayerPrefs.GetString(Keys.Level3Enabled), out level3Enabled))
             level3Enabled = true;
 
-        if (!bool.TryParse(PlayerPrefs.GetString(MainMenuManager.FreeRunEnabledKey), out freeRunEnabled))
-            freeRunEnabled = true;
+        if (!bool.TryParse(PlayerPrefs.GetString(Keys.FreeRunEnabled), out _isFreeRun))
+            _isFreeRun = true;
 
         if (level1Enabled)
             Level1Button.interactable = Level1Button.enabled = true;
@@ -42,9 +40,6 @@ public class LevelSelectorManager : MonoBehaviour
 
         if (level3Enabled)
             Level3Button.interactable = Level3Button.enabled = true;
-
-        if (freeRunEnabled)
-            FreeRunToggle.interactable = FreeRunToggle.enabled = true;
     }
 
     public void ReturnToMainMenu()
@@ -54,30 +49,25 @@ public class LevelSelectorManager : MonoBehaviour
 
     public void StartLevel1()
     {
-        PlayerPrefs.SetString(MainMenuManager.CurrentLevelKey, Levels.Level1.ToString());
-        PlayerPrefs.SetString(MainMenuManager.FreeRunKey, _isFreeRun.ToString());
+        PlayerPrefs.SetString(Keys.CurrentLevel, Levels.Level1.ToString());
+        PlayerPrefs.SetString(Keys.FreeRun, _isFreeRun.ToString());
 
         SceneManager.LoadScene(Level1SceneName);
     }
 
     public void StartLevel2()
     {
-        PlayerPrefs.SetString(MainMenuManager.CurrentLevelKey, Levels.Level2.ToString());
-        PlayerPrefs.SetString(MainMenuManager.FreeRunKey, _isFreeRun.ToString());
+        PlayerPrefs.SetString(Keys.CurrentLevel, Levels.Level2.ToString());
+        PlayerPrefs.SetString(Keys.FreeRun, _isFreeRun.ToString());
 
         SceneManager.LoadScene(Level2SceneName);
     }
 
     public void StartLevel3()
     {
-        PlayerPrefs.SetString(MainMenuManager.CurrentLevelKey, Levels.Level3.ToString());
-        PlayerPrefs.SetString(MainMenuManager.FreeRunKey, _isFreeRun.ToString());
+        PlayerPrefs.SetString(Keys.CurrentLevel, Levels.Level3.ToString());
+        PlayerPrefs.SetString(Keys.FreeRun, _isFreeRun.ToString());
 
         SceneManager.LoadScene(Level3SceneName);
-    }
-
-    public void FreeRunCheckedChanged()
-    {
-        _isFreeRun = FreeRunToggle.isOn;
     }
 }
