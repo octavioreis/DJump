@@ -11,15 +11,18 @@ public class GameManager : MonoBehaviour
     public static float HorizontalMaxLimit = 3.5f;
     public static float HorizontalMinLimit = -3.5f;
 
-    public int DistanceNeededToFinishLevel1 = 200;
-    public int DistanceNeededToFinishLevel2 = 300;
-    public int DistanceNeededToFinishLevel3 = 400;
-    public Text ScoreText;
+    public int DistanceNeededToFinishLevel1 = 250;
+    public int DistanceNeededToFinishLevel2 = 350;
+    public int DistanceNeededToFinishLevel3 = 450;
     public int StartingLives = 1;
     public string EndGameSceneName;
 
+    public Text NeededScoreText;
+    public Text ScoreText;
+
     private Levels _currentLevel;
     private bool _isFreeRun;
+    private int _scoreNeeded;
 
     public void Start()
     {
@@ -31,6 +34,19 @@ public class GameManager : MonoBehaviour
         _currentLevel = (Levels)Enum.Parse(typeof(Levels), PlayerPrefs.GetString(Keys.CurrentLevel));
         _isFreeRun = isFreeRun;
 
+        switch (_currentLevel)
+        {
+            case Levels.Level1:
+                _scoreNeeded = DistanceNeededToFinishLevel1;
+                break;
+            case Levels.Level2:
+                _scoreNeeded = DistanceNeededToFinishLevel2;
+                break;
+            case Levels.Level3:
+                _scoreNeeded = DistanceNeededToFinishLevel3;
+                break;
+        }
+
         GameLives = StartingLives;
         GameScore = 0;
     }
@@ -41,23 +57,14 @@ public class GameManager : MonoBehaviour
 
         if (!_isFreeRun)
         {
-            switch (_currentLevel)
-            {
-                case Levels.Level1:
-                    if (GameScore >= DistanceNeededToFinishLevel1)
-                        EndGame();
-                    break;
-                case Levels.Level2:
-                    if (GameScore >= DistanceNeededToFinishLevel2)
-                        EndGame();
-                    break;
-                case Levels.Level3:
-                    if (GameScore >= DistanceNeededToFinishLevel3)
-                        EndGame();
-                    break;
-                default:
-                    break;
-            }
+            NeededScoreText.text = string.Concat("Goal Score: ", _scoreNeeded);
+
+            if (GameScore >= _scoreNeeded)
+                EndGame();
+        }
+        else
+        {
+            NeededScoreText.enabled = false;
         }
 
         if (GameLives == 0)
