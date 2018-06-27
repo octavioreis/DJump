@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 417536089}
   - component: {fileID: 417536088}
   m_Layer: 5
-  m_Name: FreeRunUnlockedText
+  m_Name: ContentUnlockedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -180,9 +180,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'You unlocked free run mode!
-
-    From now on all games are infinite!'
+  m_Text: You unlocked [PH]!
 --- !u!222 &417536089
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -812,7 +810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 094e6df6923d9944c9ee8654207043fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FreeRunUnlockedText: {fileID: 417536088}
+  ContentUnlockedText: {fileID: 417536088}
   ScoreText: {fileID: 678834273}
   TitleText: {fileID: 1728705501}
   MainMenuSceneName: Main

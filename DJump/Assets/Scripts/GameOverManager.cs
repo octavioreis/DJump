@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameOverManager : MonoBehaviour
 {
-    public Text FreeRunUnlockedText;
+    public Text ContentUnlockedText;
     public Text ScoreText;
     public Text TitleText;
     public string MainMenuSceneName;
@@ -33,7 +33,7 @@ public class GameOverManager : MonoBehaviour
 
         UpdateSave();
 
-        FreeRunUnlockedText.enabled = false;
+        ContentUnlockedText.enabled = false;
     }
 
     public void Update()
@@ -44,8 +44,21 @@ public class GameOverManager : MonoBehaviour
         {
             TitleText.text = "LEVEL COMPLETED";
 
-            if (_currentLevel == Levels.Level3)
-                FreeRunUnlockedText.enabled = true;
+            if (_currentLevel == Levels.Level1)
+            {
+                ContentUnlockedText.text = "You unlocked the Sky stage!";
+                ContentUnlockedText.enabled = true;
+            }
+            else if (_currentLevel == Levels.Level2)
+            {
+                ContentUnlockedText.text = "You unlocked the Space stage!";
+                ContentUnlockedText.enabled = true;
+            }
+            else if (_currentLevel == Levels.Level3)
+            {
+                ContentUnlockedText.text = "You beat all stages!\nFrom now on all games are in infinite mode!";
+                ContentUnlockedText.enabled = true;
+            }
         }
         else
         {
