@@ -11,9 +11,9 @@ public class GameManager : MonoBehaviour
     public static float HorizontalMaxLimit = 3.5f;
     public static float HorizontalMinLimit = -3.5f;
 
-    public int DistanceNeededToFinishLevel1 = 250;
-    public int DistanceNeededToFinishLevel2 = 350;
-    public int DistanceNeededToFinishLevel3 = 450;
+    public int DistanceNeededToFinishLevel1 = 150;
+    public int DistanceNeededToFinishLevel2 = 200;
+    public int DistanceNeededToFinishLevel3 = 250;
     public int StartingLives = 1;
     public string EndGameSceneName;
 
