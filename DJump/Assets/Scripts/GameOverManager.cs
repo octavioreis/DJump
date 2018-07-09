@@ -10,7 +10,6 @@ public class GameOverManager : MonoBehaviour
     public Text TitleText;
 
     private Levels _currentLevel;
-    private bool _storyMode;
     private bool _playerDied;
     private string _playerName;
     private int _playerScore;
@@ -22,9 +21,6 @@ public class GameOverManager : MonoBehaviour
 
     public void Start()
     {
-        if (!bool.TryParse(PlayerPrefs.GetString(Consts.StoryMode), out _storyMode))
-            _storyMode = false;
-
         if (!bool.TryParse(PlayerPrefs.GetString(Consts.PlayerDied), out _playerDied))
             _playerDied = true;
 
@@ -41,7 +37,7 @@ public class GameOverManager : MonoBehaviour
     {
         ScoreText.text = string.Concat("Final Score: ", _playerScore);
 
-        if (_storyMode && !_playerDied)
+        if (!SaveManager.Instance.StoryModeCompleted && !_playerDied)
         {
             TitleText.text = "LEVEL COMPLETED";
 
@@ -69,7 +65,7 @@ public class GameOverManager : MonoBehaviour
 
     private void UpdateSave()
     {
-        if (_storyMode)
+        if (!SaveManager.Instance.StoryModeCompleted)
         {
             if (!_playerDied)
             {

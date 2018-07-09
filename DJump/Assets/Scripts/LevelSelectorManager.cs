@@ -10,30 +10,17 @@ public class LevelSelectorManager : MonoBehaviour
     public Button Level3Button;
     public InputField PlayerNameInputField;
 
-    private bool _storyMode;
     private readonly string _placeholderPlayerName = "ABC";
 
     public void Start()
     {
-        bool level2Enabled;
-        bool level3Enabled;
-
-        if (!bool.TryParse(PlayerPrefs.GetString(Consts.Level2Enabled), out level2Enabled))
-            level2Enabled = true;
-
-        if (!bool.TryParse(PlayerPrefs.GetString(Consts.Level3Enabled), out level3Enabled))
-            level3Enabled = true;
-
-        if (!bool.TryParse(PlayerPrefs.GetString(Consts.StoryMode), out _storyMode))
-            _storyMode = false;
-
-        if (level2Enabled)
+        if (SaveManager.Instance.Level2Enabled)
             Level2Button.interactable = Level2Button.enabled = true;
 
-        if (level3Enabled)
+        if (SaveManager.Instance.Level3Enabled)
             Level3Button.interactable = Level3Button.enabled = true;
 
-        if (_storyMode)
+        if (!SaveManager.Instance.StoryModeCompleted)
             PlayerNameInputField.gameObject.SetActive(false);
 
         var playerName = PlayerPrefs.GetString(Consts.PlayerName);
@@ -75,7 +62,7 @@ public class LevelSelectorManager : MonoBehaviour
 
     private string GetPlayerName()
     {
-        if (_storyMode)
+        if (!SaveManager.Instance.StoryModeCompleted)
             return _placeholderPlayerName;
 
         var playerName = PlayerNameInputField.text;

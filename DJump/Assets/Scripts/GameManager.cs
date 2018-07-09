@@ -25,14 +25,10 @@ public class GameManager : MonoBehaviour
     public Text ScoreText;
 
     private Levels _currentLevel;
-    private bool _storyMode;
     private int _scoreNeeded;
 
     public void Start()
     {
-        if (!bool.TryParse(PlayerPrefs.GetString(Consts.StoryMode), out _storyMode))
-            _storyMode = false;
-
         _currentLevel = (Levels)Enum.Parse(typeof(Levels), PlayerPrefs.GetString(Consts.CurrentLevel));
 
         switch (_currentLevel)
@@ -56,7 +52,7 @@ public class GameManager : MonoBehaviour
     {
         ScoreText.text = string.Concat("Score: ", GameScore);
 
-        if (_storyMode)
+        if (!SaveManager.Instance.StoryModeCompleted)
         {
             NeededScoreText.text = string.Concat("Goal Score: ", _scoreNeeded);
 
