@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -22,6 +21,7 @@ public class PauseMenu : MonoBehaviour
     {
         GameManager.EndingGameReason = GameOverReason.Quit;
         Time.timeScale = 1f;
+        GameIsPaused = false;
     }
 
     public void Pause()
