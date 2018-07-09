@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
     {
         if (string.Equals(other.gameObject.tag, "Player"))
         {
-            GameManager.GameLives--;
+            GameManager.EndingGameReason = GameOverReason.EnemyCollision;
         }
         else if (string.Equals(other.gameObject.tag, "Bullet"))
         {

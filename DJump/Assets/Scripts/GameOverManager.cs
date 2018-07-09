@@ -8,7 +8,6 @@ public class GameOverManager : MonoBehaviour
     public Text ContentUnlockedText;
     public Text ScoreText;
     public Text TitleText;
-    public string MainMenuSceneName;
 
     private Levels _currentLevel;
     private bool _isFreeRun;
@@ -18,7 +17,7 @@ public class GameOverManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene(MainMenuSceneName);
+        SceneManager.LoadScene(Consts.MainMenuSceneName);
     }
 
     public void Start()

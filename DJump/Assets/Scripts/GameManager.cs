@@ -5,21 +5,21 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public readonly static float HalfScreenHeight = 4.6f;
+    public readonly static float PlatformHorizontalMaxLimit = 3.5f;
+    public readonly static float PlatformHorizontalMinLimit = -3.5f;
+    public readonly static float EnemyHorizontalMaxLimit = 3f;
+    public readonly static float EnemyHorizontalMinLimit = -3f;
+    public readonly static float PlayerHorizontalMaxLimit = 4f;
+    public readonly static float PlayerHorizontalMinLimit = -4f;
+
     public static int GameScore;
-    public static int GameLives;
-    public static float HalfScreenHeight = 4.6f;
-    public static float PlatformHorizontalMaxLimit = 3.5f;
-    public static float PlatformHorizontalMinLimit = -3.5f;
-    public static float EnemyHorizontalMaxLimit = 3f;
-    public static float EnemyHorizontalMinLimit = -3f;
-    public static float PlayerHorizontalMaxLimit = 4f;
-    public static float PlayerHorizontalMinLimit = -4f;
+    public static GameOverReason? EndingGameReason;
 
     public int DistanceNeededToFinishLevel1 = 200;
     public int DistanceNeededToFinishLevel2 = 275;
     public int DistanceNeededToFinishLevel3 = 350;
     public int StartingLives = 1;
-    public string EndGameSceneName;
 
     public Text NeededScoreText;
     public Text ScoreText;
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        GameLives = StartingLives;
+        EndingGameReason = null;
         GameScore = 0;
     }
 
@@ -61,21 +61,23 @@ public class GameManager : MonoBehaviour
             NeededScoreText.text = string.Concat("Goal Score: ", _scoreNeeded);
 
             if (GameScore >= _scoreNeeded)
-                EndGame();
+                EndGame(GameOverReason.LevelCompleted);
         }
         else
         {
             NeededScoreText.enabled = false;
         }
 
-        if (GameLives == 0)
-            EndGame(true);
+        if (EndingGameReason != null)
+            EndGame(EndingGameReason.Value);
     }
 
-    private void EndGame(bool playerDied = false)
+    private void EndGame(GameOverReason cause)
     {
+        var playerDied = cause != GameOverReason.LevelCompleted && cause != GameOverReason.Quit;
+
         PlayerPrefs.SetString(Consts.PlayerDied, playerDied.ToString());
         PlayerPrefs.SetInt(Consts.Score, GameScore);
-        SceneManager.LoadScene(EndGameSceneName);
+        SceneManager.LoadScene(Consts.GameOverSceneName);
     }
 }

@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     {
         _movement = Input.GetAxis("Horizontal") * MovementSpeed;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !PauseMenu.GameIsPaused)
         {
             var mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var direction = (mouseWorldPosition - transform.position).normalized;
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
 
         var distanceCameraToPlayer = CameraTransform.position.y - yAxisDistanceTraveled;
         if (distanceCameraToPlayer >= GameManager.HalfScreenHeight)
-            GameManager.GameLives = 0;
+            GameManager.EndingGameReason = GameOverReason.Fall;
     }
 
     void FixedUpdate()

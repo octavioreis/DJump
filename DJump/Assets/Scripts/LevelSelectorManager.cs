@@ -5,10 +5,6 @@ using UnityEngine.UI;
 
 public class LevelSelectorManager : MonoBehaviour
 {
-    public string Level1SceneName;
-    public string Level2SceneName;
-    public string Level3SceneName;
-    public string MainMenuSceneName;
     public Button Level1Button;
     public Button Level2Button;
     public Button Level3Button;
@@ -47,28 +43,28 @@ public class LevelSelectorManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene(MainMenuSceneName);
+        SceneManager.LoadScene(Consts.MainMenuSceneName);
     }
 
     public void StartLevel1()
     {
         SetPlayerPrefs(Levels.Level1);
 
-        SceneManager.LoadScene(Level1SceneName);
+        SceneManager.LoadScene(Consts.Level1SceneName);
     }
 
     public void StartLevel2()
     {
         SetPlayerPrefs(Levels.Level2);
 
-        SceneManager.LoadScene(Level2SceneName);
+        SceneManager.LoadScene(Consts.Level2SceneName);
     }
 
     public void StartLevel3()
     {
         SetPlayerPrefs(Levels.Level3);
 
-        SceneManager.LoadScene(Level3SceneName);
+        SceneManager.LoadScene(Consts.Level3SceneName);
     }
 
     private void SetPlayerPrefs(Levels selectedLevel)

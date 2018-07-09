@@ -3,9 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public string LevelSelectorSceneName;
-    public string HighScoresSceneName;
-
     public void Start()
     {
         SaveManager.Instance.Load();
@@ -17,12 +14,12 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartNewGame()
     {
-        SceneManager.LoadScene(LevelSelectorSceneName);
+        SceneManager.LoadScene(Consts.LevelSelectorSceneName);
     }
 
     public void OpenHighScores()
     {
-        SceneManager.LoadScene(HighScoresSceneName);
+        SceneManager.LoadScene(Consts.HighScoresSceneName);
     }
 
     public void QuitGame()
