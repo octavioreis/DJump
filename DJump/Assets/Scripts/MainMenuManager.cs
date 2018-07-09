@@ -9,7 +9,7 @@ public class MainMenuManager : MonoBehaviour
 
         PlayerPrefs.SetString(Consts.Level2Enabled, SaveManager.Instance.Level2Enabled.ToString());
         PlayerPrefs.SetString(Consts.Level3Enabled, SaveManager.Instance.Level3Enabled.ToString());
-        PlayerPrefs.SetString(Consts.FreeRunEnabled, SaveManager.Instance.FreeRunEnabled.ToString());
+        PlayerPrefs.SetString(Consts.StoryMode, (!SaveManager.Instance.StoryModeCompleted).ToString());
     }
 
     public void StartNewGame()

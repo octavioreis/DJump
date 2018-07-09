@@ -17,13 +17,13 @@ public class SaveManager
 
     public bool Level2Enabled { get; set; }
     public bool Level3Enabled { get; set; }
-    public bool FreeRunEnabled { get; set; }
+    public bool StoryModeCompleted { get; set; }
     public readonly List<PlayerScore> PlayerScores = new List<PlayerScore>();
 
     private readonly string _saveFilePath = @".\save.xml";
     private readonly string _saveXmlTemplate =
         "<RatJump>"
-      + "   <Levels FreeRunEnabled=\"False\">"
+      + "   <Levels StoryModeCompleted=\"False\">"
       + "     <Level2 Enabled=\"False\" />"
       + "     <Level3 Enabled=\"False\" />"
       + "   </Levels>"
@@ -52,7 +52,7 @@ public class SaveManager
         {
             Level2Enabled = CheckIfLevelIsEnabled(levelsNode, Levels.Level2.ToString());
             Level3Enabled = CheckIfLevelIsEnabled(levelsNode, Levels.Level3.ToString());
-            FreeRunEnabled = CheckIfFreeRunIsEnabled(levelsNode);
+            StoryModeCompleted = CheckIfStoryModeIsCompleted(levelsNode);
         }
 
         var scoresNode = saveXml.Elements().GetElement(Consts.HighScores);
@@ -86,7 +86,7 @@ public class SaveManager
 
         level2Node.Add(new XAttribute(Consts.Enabled, Level2Enabled));
         level3Node.Add(new XAttribute(Consts.Enabled, Level3Enabled));
-        levelsNode.Add(new XAttribute(Consts.FreeRunEnabled, FreeRunEnabled));
+        levelsNode.Add(new XAttribute(Consts.StoryModeCompleted, StoryModeCompleted));
         levelsNode.Add(level2Node);
         levelsNode.Add(level3Node);
         saveXml.Add(levelsNode);
@@ -116,20 +116,16 @@ public class SaveManager
         var levelNode = levelsNode.Elements().FirstOrDefault(e => e.Name.LocalName.Equals(levelName, StringComparison.OrdinalIgnoreCase));
         if (levelNode != null)
         {
-            var enabledAttribute = levelNode.Attributes().FirstOrDefault(a => a.Name.LocalName.Equals("enabled", StringComparison.OrdinalIgnoreCase));
-            if (enabledAttribute != null)
-                return enabledAttribute.Value.Equals("true", StringComparison.OrdinalIgnoreCase);
+            var enabled = levelNode.Attributes().GetAttributeValue(Consts.Enabled);
+            return string.Equals(enabled, "true", StringComparison.OrdinalIgnoreCase);
         }
 
         return false;
     }
 
-    private bool CheckIfFreeRunIsEnabled(XElement levelsNode)
+    private bool CheckIfStoryModeIsCompleted(XElement levelsNode)
     {
-        var freeRunEnabledAttribute = levelsNode.Attributes().FirstOrDefault(e => e.Name.LocalName.Equals("freeRunEnabled", StringComparison.OrdinalIgnoreCase));
-        if (freeRunEnabledAttribute != null)
-            return freeRunEnabledAttribute.Value.Equals("true", StringComparison.OrdinalIgnoreCase);
-
-        return false;
+        var storyModeCompleted = levelsNode.Attributes().GetAttributeValue(Consts.StoryModeCompleted);
+        return string.Equals(storyModeCompleted, "true", StringComparison.OrdinalIgnoreCase);
     }
 }

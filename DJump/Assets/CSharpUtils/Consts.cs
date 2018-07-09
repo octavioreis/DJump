@@ -2,8 +2,8 @@
 {
     public static readonly string CurrentLevel = "CurrentLevel";
     public static readonly string Enabled = "Enabled";
-    public static readonly string FreeRun = "FreeRun";
-    public static readonly string FreeRunEnabled = "FreeRunEnabled";
+    public static readonly string StoryMode = "StoryMode";
+    public static readonly string StoryModeCompleted = "StoryModeCompleted";
     public static readonly string HighScores = "HighScores";
     public static readonly string Level2Enabled = "Level2Enabled";
     public static readonly string Level3Enabled = "Level3Enabled";
