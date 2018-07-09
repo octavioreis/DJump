@@ -74,7 +74,7 @@ public class LevelGenerator : MonoBehaviour
             return;
 
         _currentPlatformPosition.y += Random.Range(currentSpawnInfo.MinY, currentSpawnInfo.MaxY);
-        _currentPlatformPosition.x = Random.Range(GameManager.HorizontalMinLimit, GameManager.HorizontalMaxLimit);
+        _currentPlatformPosition.x = Random.Range(GameManager.PlatformHorizontalMinLimit, GameManager.PlatformHorizontalMaxLimit);
 
         var platformObject = Instantiate(PlatformPrefab, _currentPlatformPosition, Quaternion.identity);
         var platform = platformObject.GetComponent<Platform>();
@@ -102,7 +102,7 @@ public class LevelGenerator : MonoBehaviour
         {
             var enemyPosition = _currentPlatformPosition;
             enemyPosition.y += 1;
-            enemyPosition.x = Random.Range(GameManager.HorizontalMinLimit, GameManager.HorizontalMaxLimit);
+            enemyPosition.x = Random.Range(GameManager.EnemyHorizontalMinLimit, GameManager.EnemyHorizontalMaxLimit);
 
             Instantiate(EnemyPrefab, enemyPosition, Quaternion.identity);
 

@@ -44,8 +44,8 @@ public class Player : MonoBehaviour
     {
         var position = _rigidBody.transform.position;
 
-        if (position.x < GameManager.HorizontalMinLimit || position.x > GameManager.HorizontalMaxLimit)
-            position.x = -Mathf.Clamp(position.x, GameManager.HorizontalMinLimit, GameManager.HorizontalMaxLimit);
+        if (position.x < GameManager.PlayerHorizontalMinLimit || position.x > GameManager.PlayerHorizontalMaxLimit)
+            position.x = -Mathf.Clamp(position.x, GameManager.PlayerHorizontalMinLimit, GameManager.PlayerHorizontalMaxLimit);
 
         var velocity = _rigidBody.velocity;
         velocity.x = _movement;

@@ -8,8 +8,12 @@ public class GameManager : MonoBehaviour
     public static int GameScore;
     public static int GameLives;
     public static float HalfScreenHeight = 4.6f;
-    public static float HorizontalMaxLimit = 3.5f;
-    public static float HorizontalMinLimit = -3.5f;
+    public static float PlatformHorizontalMaxLimit = 3.5f;
+    public static float PlatformHorizontalMinLimit = -3.5f;
+    public static float EnemyHorizontalMaxLimit = 3f;
+    public static float EnemyHorizontalMinLimit = -3f;
+    public static float PlayerHorizontalMaxLimit = 4f;
+    public static float PlayerHorizontalMinLimit = -4f;
 
     public int DistanceNeededToFinishLevel1 = 150;
     public int DistanceNeededToFinishLevel2 = 200;

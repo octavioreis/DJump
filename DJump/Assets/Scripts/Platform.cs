@@ -30,7 +30,7 @@ public class Platform : MonoBehaviour
             return;
 
         var position = _rigidBody.transform.position;
-        if (position.x < GameManager.HorizontalMinLimit || position.x > GameManager.HorizontalMaxLimit)
+        if (position.x < GameManager.PlatformHorizontalMinLimit || position.x > GameManager.PlatformHorizontalMaxLimit)
             _movement *= -1;
 
         var velocity = _rigidBody.velocity;
