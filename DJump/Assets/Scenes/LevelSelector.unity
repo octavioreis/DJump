@@ -178,7 +178,7 @@ Prefab:
     - target: {fileID: 224617472902782820, guid: 33a40d200a31fd04d82fe59532b45253,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 141.4
+      value: 95.5
       objectReference: {fileID: 0}
     - target: {fileID: 224617472902782820, guid: 33a40d200a31fd04d82fe59532b45253,
         type: 2}
@@ -268,6 +268,11 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_FontSize
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114392771141661104, guid: 33a40d200a31fd04d82fe59532b45253,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33a40d200a31fd04d82fe59532b45253, type: 2}
@@ -724,6 +729,11 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 114392771141661104, guid: 33a40d200a31fd04d82fe59532b45253,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33a40d200a31fd04d82fe59532b45253, type: 2}
   m_IsPrefabAsset: 0
@@ -882,7 +892,7 @@ Prefab:
     - target: {fileID: 224617472902782820, guid: 33a40d200a31fd04d82fe59532b45253,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 230.6
+      value: 157.2
       objectReference: {fileID: 0}
     - target: {fileID: 224617472902782820, guid: 33a40d200a31fd04d82fe59532b45253,
         type: 2}
@@ -1103,7 +1113,7 @@ Prefab:
     - target: {fileID: 224617472902782820, guid: 33a40d200a31fd04d82fe59532b45253,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 196.3
+      value: 138.9
       objectReference: {fileID: 0}
     - target: {fileID: 224617472902782820, guid: 33a40d200a31fd04d82fe59532b45253,
         type: 2}
@@ -1193,6 +1203,11 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_FontSize
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114392771141661104, guid: 33a40d200a31fd04d82fe59532b45253,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33a40d200a31fd04d82fe59532b45253, type: 2}
