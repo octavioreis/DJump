@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !PauseMenu.GameIsPaused)
         {
             var mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var direction = (mouseWorldPosition - transform.position).normalized;
+            var direction = (mouseWorldPosition - SocketTransform.position).normalized;
             direction.z = 0;
 
             SocketTransform.transform.up = direction;

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public static int GameScore;
     public static GameOverReason? EndingGameReason;
 
+    public Texture2D MouseTexture;
     public int DistanceNeededToFinishLevel1 = 200;
     public int DistanceNeededToFinishLevel2 = 275;
     public int DistanceNeededToFinishLevel3 = 350;
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
 
         switch (_currentLevel)
         {
+            default:
             case Levels.Level1:
                 _scoreNeeded = DistanceNeededToFinishLevel1;
                 break;
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
+        Cursor.SetCursor(MouseTexture, new Vector2(MouseTexture.width / 2, MouseTexture.height / 2), CursorMode.Auto);
         EndingGameReason = null;
         GameScore = 0;
     }
@@ -72,6 +75,7 @@ public class GameManager : MonoBehaviour
     {
         var playerDied = cause != GameOverReason.LevelCompleted && cause != GameOverReason.Quit;
 
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         PlayerPrefs.SetString(Consts.PlayerDied, playerDied.ToString());
         PlayerPrefs.SetInt(Consts.Score, GameScore);
         SceneManager.LoadScene(Consts.GameOverSceneName);
