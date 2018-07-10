@@ -103,6 +103,7 @@ public class LevelGenerator : MonoBehaviour
             var enemyPosition = _currentPlatformPosition;
             enemyPosition.y += 1;
             enemyPosition.x = Random.Range(GameManager.EnemyHorizontalMinLimit, GameManager.EnemyHorizontalMaxLimit);
+            enemyPosition.z = -1;
 
             Instantiate(EnemyPrefab, enemyPosition, Quaternion.identity);
 
