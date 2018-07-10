@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
 
         var distanceCameraToPlayer = CameraTransform.position.y - yAxisDistanceTraveled;
         if (distanceCameraToPlayer >= GameManager.HalfScreenHeight)
-            GameManager.EndingGameReason = GameOverReason.Fall;
+            GameManager.EndingGameReason = GameOverReason.Death;
     }
 
     void FixedUpdate()

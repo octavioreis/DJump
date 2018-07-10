@@ -2,6 +2,5 @@
 {
     LevelCompleted,
     Quit,
-    EnemyCollision,
-    Fall
+    Death
 }

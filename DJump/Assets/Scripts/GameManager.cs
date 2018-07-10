@@ -73,10 +73,8 @@ public class GameManager : MonoBehaviour
 
     private void EndGame(GameOverReason cause)
     {
-        var playerDied = cause != GameOverReason.LevelCompleted && cause != GameOverReason.Quit;
-
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-        PlayerPrefs.SetString(Consts.PlayerDied, playerDied.ToString());
+        PlayerPrefs.SetString(Consts.PlayerDied, (cause == GameOverReason.Death || cause == GameOverReason.Quit).ToString());
         PlayerPrefs.SetInt(Consts.Score, GameScore);
         SceneManager.LoadScene(Consts.GameOverSceneName);
     }
