@@ -437,7 +437,7 @@ Prefab:
     - target: {fileID: 224617472902782820, guid: 33a40d200a31fd04d82fe59532b45253,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 236.8
+      value: 145
       objectReference: {fileID: 0}
     - target: {fileID: 224617472902782820, guid: 33a40d200a31fd04d82fe59532b45253,
         type: 2}
@@ -506,7 +506,7 @@ Prefab:
     - target: {fileID: 114652888235081762, guid: 33a40d200a31fd04d82fe59532b45253,
         type: 2}
       propertyPath: m_Text
-      value: HIGH SCORES
+      value: SCORES
       objectReference: {fileID: 0}
     - target: {fileID: 114652888235081762, guid: 33a40d200a31fd04d82fe59532b45253,
         type: 2}
@@ -726,7 +726,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.2400519, g: 0.26107746, b: 0.29411763, a: 0}
+  m_BackGroundColor: {r: 0.12941177, g: 0.61960787, b: 0.9529412, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
