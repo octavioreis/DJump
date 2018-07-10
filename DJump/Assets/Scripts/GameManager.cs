@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public static GameOverReason? EndingGameReason;
 
     public Texture2D MouseTexture;
+    public GameObject FinishLine;
     public int DistanceNeededToFinishLevel1 = 200;
     public int DistanceNeededToFinishLevel2 = 275;
     public int DistanceNeededToFinishLevel3 = 350;
@@ -44,6 +45,14 @@ public class GameManager : MonoBehaviour
             case Levels.Level3:
                 _scoreNeeded = DistanceNeededToFinishLevel3;
                 break;
+        }
+
+        if (!SaveManager.Instance.StoryModeCompleted)
+        {
+            FinishLine.SetActive(true);
+            var position = FinishLine.transform.position;
+            position.y = _scoreNeeded;
+            FinishLine.transform.position = position;
         }
 
         Cursor.SetCursor(MouseTexture, new Vector2(MouseTexture.width / 2, MouseTexture.height / 2), CursorMode.Auto);
