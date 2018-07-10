@@ -1,11 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelSelectorManager : MonoBehaviour
 {
-    public Button Level1Button;
     public Button Level2Button;
     public Button Level3Button;
     public InputField PlayerNameInputField;
