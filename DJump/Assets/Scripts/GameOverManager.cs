@@ -28,12 +28,13 @@ public class GameOverManager : MonoBehaviour
         _playerName = PlayerPrefs.GetString(Consts.PlayerName);
         _playerScore = PlayerPrefs.GetInt(Consts.Score);
 
+        UpdateText();
         UpdateSave();
 
         ContentUnlockedText.enabled = false;
     }
 
-    public void Update()
+    private void UpdateText()
     {
         ScoreText.text = string.Concat("Final Score: ", _playerScore);
 
@@ -44,12 +45,18 @@ public class GameOverManager : MonoBehaviour
             switch (_currentLevel)
             {
                 case Levels.Level1:
-                    ContentUnlockedText.text = "You unlocked the Sky stage!";
-                    ContentUnlockedText.enabled = true;
+                    if (!SaveManager.Instance.Level2Enabled)
+                    {
+                        ContentUnlockedText.text = "You unlocked the Sky stage!";
+                        ContentUnlockedText.enabled = true;
+                    }
                     break;
                 case Levels.Level2:
-                    ContentUnlockedText.text = "You unlocked the Space stage!";
-                    ContentUnlockedText.enabled = true;
+                    if (!SaveManager.Instance.Level3Enabled)
+                    {
+                        ContentUnlockedText.text = "You unlocked the Space stage!";
+                        ContentUnlockedText.enabled = true;
+                    }
                     break;
                 case Levels.Level3:
                     ContentUnlockedText.text = "You beat all stages!\nFrom now on all games are in infinite mode!";

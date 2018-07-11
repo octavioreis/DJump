@@ -771,22 +771,22 @@ Prefab:
     - target: {fileID: 224887187548865144, guid: 03e57f79b1d6d204b844520d45da4b61,
         type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 224131406992471038, guid: 03e57f79b1d6d204b844520d45da4b61,
         type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 224692132592038758, guid: 03e57f79b1d6d204b844520d45da4b61,
         type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224514312890391742, guid: 03e57f79b1d6d204b844520d45da4b61,
         type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114533354655833582, guid: 03e57f79b1d6d204b844520d45da4b61,
         type: 2}
@@ -893,6 +893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68b6a7c50cf48754097c5c3ade677781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TransitionPanel: {fileID: 0}
   TutorialPanel1: {fileID: 999445665}
   TutorialPanel2: {fileID: 2075363627}
   TutorialPanel3: {fileID: 331002566}
@@ -1129,6 +1130,7 @@ GameObject:
   - component: {fileID: 999445666}
   - component: {fileID: 999445668}
   - component: {fileID: 999445667}
+  - component: {fileID: 999445669}
   m_Layer: 5
   m_Name: TutorialPresentationPanel
   m_TagString: Untagged
@@ -1190,6 +1192,24 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 999445665}
   m_CullTransparentMesh: 0
+--- !u!95 &999445669
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 999445665}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 643c941a2318bb74aa58efb6e0aa2f03, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1168048912
 Prefab:
   m_ObjectHideFlags: 0
