@@ -8,18 +8,14 @@ public class GameOverManager : MonoBehaviour
     public Text ContentUnlockedText;
     public Text ScoreText;
     public Text TitleText;
+    public GameObject TryAgainButton;
 
     private Levels _currentLevel;
     private bool _playerDied;
     private string _playerName;
     private int _playerScore;
 
-    public void ReturnToMainMenu()
-    {
-        SceneManager.LoadScene(Consts.MainMenuSceneName);
-    }
-
-    public void Start()
+    void Start()
     {
         if (!bool.TryParse(PlayerPrefs.GetString(Consts.PlayerDied), out _playerDied))
             _playerDied = true;
@@ -28,11 +24,37 @@ public class GameOverManager : MonoBehaviour
         _playerName = PlayerPrefs.GetString(Consts.PlayerName);
         _playerScore = PlayerPrefs.GetInt(Consts.Score);
 
-        UpdateText();
+        UpdateUI();
         UpdateSave();
     }
 
-    private void UpdateText()
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene(Consts.MainMenuSceneName);
+    }
+
+    public void TryAgain()
+    {
+        string sceneName;
+
+        switch (_currentLevel)
+        {
+            default:
+            case Levels.Level1:
+                sceneName = Consts.Level1SceneName;
+                break;
+            case Levels.Level2:
+                sceneName = Consts.Level2SceneName;
+                break;
+            case Levels.Level3:
+                sceneName = Consts.Level3SceneName;
+                break;
+        }
+
+        SceneManager.LoadScene(sceneName);
+    }
+
+    private void UpdateUI()
     {
         ScoreText.text = string.Concat("Final Score: ", _playerScore);
 
@@ -65,6 +87,7 @@ public class GameOverManager : MonoBehaviour
         else
         {
             TitleText.text = "GAME OVER";
+            TryAgainButton.SetActive(true);
         }
     }
 
