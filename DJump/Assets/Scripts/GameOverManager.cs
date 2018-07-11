@@ -30,8 +30,6 @@ public class GameOverManager : MonoBehaviour
 
         UpdateText();
         UpdateSave();
-
-        ContentUnlockedText.enabled = false;
     }
 
     private void UpdateText()
@@ -48,19 +46,19 @@ public class GameOverManager : MonoBehaviour
                     if (!SaveManager.Instance.Level2Enabled)
                     {
                         ContentUnlockedText.text = "You unlocked the Sky stage!";
-                        ContentUnlockedText.enabled = true;
+                        ContentUnlockedText.gameObject.SetActive(true);
                     }
                     break;
                 case Levels.Level2:
                     if (!SaveManager.Instance.Level3Enabled)
                     {
                         ContentUnlockedText.text = "You unlocked the Space stage!";
-                        ContentUnlockedText.enabled = true;
+                        ContentUnlockedText.gameObject.SetActive(true);
                     }
                     break;
                 case Levels.Level3:
                     ContentUnlockedText.text = "You beat all stages!\nFrom now on all games are in infinite mode!";
-                    ContentUnlockedText.enabled = true;
+                    ContentUnlockedText.gameObject.SetActive(true);
                     break;
             }
         }
