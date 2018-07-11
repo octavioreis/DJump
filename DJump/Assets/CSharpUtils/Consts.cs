@@ -2,8 +2,6 @@
 {
     public static readonly string CurrentLevel = "CurrentLevel";
     public static readonly string Enabled = "Enabled";
-    public static readonly string StoryMode = "StoryMode";
-    public static readonly string StoryModeCompleted = "StoryModeCompleted";
     public static readonly string HighScores = "HighScores";
     public static readonly string Level2Enabled = "Level2Enabled";
     public static readonly string Level3Enabled = "Level3Enabled";
@@ -12,6 +10,9 @@
     public static readonly string PlayerName = "PlayerName";
     public static readonly string RatJump = "RatJump";
     public static readonly string Score = "Score";
+    public static readonly string StoryMode = "StoryMode";
+    public static readonly string StoryModeCompleted = "StoryModeCompleted";
+    public static readonly string TutorialCompleted = "TutorialCompleted";
     public static readonly string Value = "Value";
 
     #region Scene Names

@@ -8,7 +8,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !TutorialManager.TutorialPlaying)
         {
             if (GameIsPaused)
                 Resume();
@@ -34,7 +34,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         PauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
         GameIsPaused = false;
+        Time.timeScale = 1f;
     }
 }

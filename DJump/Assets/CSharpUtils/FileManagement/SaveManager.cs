@@ -15,15 +15,16 @@ public class SaveManager
         }
     }
 
+    public readonly List<PlayerScore> PlayerScores = new List<PlayerScore>();
     public bool Level2Enabled { get; set; }
     public bool Level3Enabled { get; set; }
     public bool StoryModeCompleted { get; set; }
-    public readonly List<PlayerScore> PlayerScores = new List<PlayerScore>();
+    public bool TutorialCompleted { get; set; }
 
     private readonly string _saveFilePath = @".\save.xml";
     private readonly string _saveXmlTemplate =
         "<RatJump>"
-      + "   <Levels StoryModeCompleted=\"False\">"
+      + "   <Levels StoryModeCompleted=\"False\" TutorialCompleted=\"False\">"
       + "     <Level2 Enabled=\"False\" />"
       + "     <Level3 Enabled=\"False\" />"
       + "   </Levels>"
@@ -53,6 +54,7 @@ public class SaveManager
             Level2Enabled = CheckIfLevelIsEnabled(levelsNode, Levels.Level2.ToString());
             Level3Enabled = CheckIfLevelIsEnabled(levelsNode, Levels.Level3.ToString());
             StoryModeCompleted = CheckIfStoryModeIsCompleted(levelsNode);
+            TutorialCompleted = CheckIfTutorialIsCompleted(levelsNode);
         }
 
         var scoresNode = saveXml.Elements().GetElement(Consts.HighScores);
@@ -87,6 +89,7 @@ public class SaveManager
         level2Node.Add(new XAttribute(Consts.Enabled, Level2Enabled));
         level3Node.Add(new XAttribute(Consts.Enabled, Level3Enabled));
         levelsNode.Add(new XAttribute(Consts.StoryModeCompleted, StoryModeCompleted));
+        levelsNode.Add(new XAttribute(Consts.TutorialCompleted, TutorialCompleted));
         levelsNode.Add(level2Node);
         levelsNode.Add(level3Node);
         saveXml.Add(levelsNode);
@@ -127,5 +130,11 @@ public class SaveManager
     {
         var storyModeCompleted = levelsNode.Attributes().GetAttributeValue(Consts.StoryModeCompleted);
         return string.Equals(storyModeCompleted, "true", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private bool CheckIfTutorialIsCompleted(XElement levelsNode)
+    {
+        var tutorialCompleted = levelsNode.Attributes().GetAttributeValue(Consts.TutorialCompleted);
+        return string.Equals(tutorialCompleted, "true", StringComparison.OrdinalIgnoreCase);
     }
 }

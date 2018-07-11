@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     {
         _movement = Input.GetAxis("Horizontal") * MovementSpeed;
 
-        if (Input.GetMouseButtonDown(0) && !PauseMenu.GameIsPaused)
+        if (Input.GetMouseButtonDown(0) && !PauseMenu.GameIsPaused && !TutorialManager.TutorialPlaying)
         {
             var mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var direction = (mouseWorldPosition - SocketTransform.position).normalized;
