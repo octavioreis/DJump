@@ -3,6 +3,7 @@
 public class Platform : MonoBehaviour
 {
     public Transform CameraTransform;
+    public AudioSource JumpingSound;
     public bool Stationary = true;
 
     private float _jumpForce = 11.5f;
@@ -46,12 +47,13 @@ public class Platform : MonoBehaviour
             return;
 
         var rigidBody = collision.collider.GetComponent<Rigidbody2D>();
-
         if (rigidBody != null)
         {
             var velocity = rigidBody.velocity;
             velocity.y = _jumpForce;
             rigidBody.velocity = velocity;
+
+            JumpingSound.Play();
         }
     }
 }

@@ -9,6 +9,8 @@ public class LevelGenerator : MonoBehaviour
     public GameObject PlatformPrefab;
     public GameObject EnemyPrefab;
     public Transform CameraTransform;
+    public AudioSource JumpingSound;
+    public AudioSource EnemyDeathSound;
 
     private Vector3 _currentPlatformPosition;
     private List<EnemySpawnInfo> _enemySpawnSettings;
@@ -76,11 +78,11 @@ public class LevelGenerator : MonoBehaviour
         _currentPlatformPosition.y += Random.Range(currentSpawnInfo.MinY, currentSpawnInfo.MaxY);
         _currentPlatformPosition.x = Random.Range(GameManager.PlatformHorizontalMinLimit, GameManager.PlatformHorizontalMaxLimit);
 
-        var platformObject = Instantiate(PlatformPrefab, _currentPlatformPosition, Quaternion.identity);
-        var platform = platformObject.GetComponent<Platform>();
+        var platform = Instantiate(PlatformPrefab, _currentPlatformPosition, Quaternion.identity).GetComponent<Platform>();
         if (platform != null)
         {
             platform.CameraTransform = CameraTransform;
+            platform.JumpingSound = JumpingSound;
             platform.Stationary = currentSpawnInfo.Stationary;
         }
 
@@ -105,7 +107,9 @@ public class LevelGenerator : MonoBehaviour
             enemyPosition.x = Random.Range(GameManager.EnemyHorizontalMinLimit, GameManager.EnemyHorizontalMaxLimit);
             enemyPosition.z = -1;
 
-            Instantiate(EnemyPrefab, enemyPosition, Quaternion.identity);
+            var enemy = Instantiate(EnemyPrefab, enemyPosition, Quaternion.identity).GetComponent<Enemy>();
+            if (enemy != null)
+                enemy.EnemyDeathSound = EnemyDeathSound;
 
             currentEnemySpawnSetting.ResetPlatformSpacingCounter();
 
