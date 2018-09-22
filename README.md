@@ -1,2 +1,2 @@
 # DJump
-Doodle Jump style game
+College project about a Doodle Jump style game
